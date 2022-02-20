@@ -1,0 +1,17 @@
+shadowJar {
+    def base = "${projectGroup}.api.lib"
+    relocate("me.kbrewster.eventbus", "${base}.keventbus")
+    relocate("com.github.benmanes.caffeine", "${base}.caffeine")
+    relocate("gg.essential.universal", "${base}.universalcraft")
+    relocate("xyz.deftu.quicksocket", "${base}.quicksocket")
+    relocate("org.apache.commons", "${base}.apache.commons")
+    relocate("com.google.common", "${base}.google.common")
+    relocate("gg.essential.elementa", "${base}.elementa")
+    relocate("org.java_websocket", "${base}.websocket")
+    relocate("xyz.deftu.deftils", "${base}.deftils")
+    relocate("org.apache.logging", "${base}.log4j")
+    relocate("com.google.gson", "${base}.gson")
+    relocate("com.philjay.jwt", "${base}.jwt")
+    relocate("okhttp3", "${base}.okhttp")
+    relocate("okio", "${base}.okio")
+}

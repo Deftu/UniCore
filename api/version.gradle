@@ -1,0 +1,193 @@
+buildscript {
+    def mcVersionStr = project.name.tokenize("-")[0]
+    def (major, minor, patch) = mcVersionStr.tokenize(".")
+    def base = major == null || minor == null
+    if (base) mcVersionStr = "1.18"
+    def mcVersion = base ? 11800 : "${major}${minor.padLeft(2, "0")}${(patch ?: "").padLeft(2, "0")}" as int
+    def fabric = mcVersion >= 11400
+    project.ext.mcVersion = mcVersion
+    project.ext.mcVersionStr = mcVersionStr
+    project.ext.mcPlatform = fabric ? "fabric" : "forge"
+    project.ext.fabric = fabric
+    project.ext.forge = !fabric
+
+    repositories {
+        maven { url "https://repo.woverflow.cc/" }
+    }
+
+    dependencies {
+        if (fabric) {
+            classpath("net.fabricmc:fabric-loom:0.10-SNAPSHOT")
+        } else {
+            def forgeGradleVersion = mcVersion >= 11200 ? "717a9f4" :
+                    mcVersion >= 10904 ? "83163c1" :
+                            "4be84bf"
+            classpath("com.github.ReplayMod:ForgeGradle:$forgeGradleVersion:all") {
+                exclude group: "net.sf.trove4j", module: "trove4j"
+                exclude group: "trove", module: "trove"
+            }
+        }
+    }
+}
+
+def FG3 = !fabric && mcVersion >= 11400
+def FG2 = !fabric && mcVersion < 11400
+def FABRIC = fabric
+
+if (FABRIC) apply plugin: "fabric-loom"
+else apply plugin: "net.minecraftforge.gradle.forge"
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "com.replaymod.preprocess"
+apply plugin: "net.kyori.blossom"
+apply plugin: "maven-publish"
+apply plugin: "java"
+
+archivesBaseName = projectName
+
+compileKotlin.kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+
+if (FABRIC) {
+    loom {
+        runConfigs.all {
+            ideConfigGenerated = true
+        }
+    }
+} else {
+    minecraft {
+        if (FG3) {
+            runs {
+                client {
+                    workingDirectory rootProject.file("run")
+                    property "forge.logging.console.level", "info"
+                    mods {
+                        examplemod {
+                            source sourceSets.main
+                        }
+                    }
+                }
+            }
+        } else {
+            runDir = "run"
+        }
+
+        if (!FG3) {
+            version = [
+                    11202: "1.12.2-14.23.0.2486",
+                    11201: "1.12.1-14.22.0.2444",
+                    11200: "1.12-14.21.1.2387",
+                    11102: "1.11.2-13.20.0.2216",
+                    11100: "1.11-13.19.1.2188",
+                    11002: "1.10.2-12.18.2.2099",
+                    10904: "1.9.4-12.17.0.1976",
+                    10809: "1.8.9-11.15.1.2318-1.8.9",
+                    10800: "1.8-11.14.4.1563",
+                    10710: "1.7.10-10.13.4.1558-1.7.10",
+            ][mcVersion]
+            mappings = [
+                    11404: "snapshot_20190719-1.14.3",
+                    11202: "snapshot_20170615",
+                    11201: "snapshot_20170615",
+                    11200: "snapshot_20170615",
+                    11102: "snapshot_20161220",
+                    11100: "snapshot_20161111",
+                    11002: "snapshot_20160518",
+                    10904: "snapshot_20160518",
+                    10809: "stable_22",
+                    10800: "snapshot_nodoc_20141130",
+                    10710: "stable_12",
+            ][mcVersion]
+        } else if (mcVersion < 11700) {
+            mappings channel: "snapshot", version: [
+                    11502: "20200220-1.15.1",
+                    11602: "20201028-1.16.3",
+            ][mcVersion]
+        } else {
+            mappings channel: "official", version: mcVersionStr
+        }
+    }
+}
+
+blossom {
+    replaceToken("__VERSION__", projectVersion)
+}
+
+dependencies {
+    if (FABRIC) {
+        minecraft("com.mojang:minecraft:" + [
+                11800: "1.18"
+        ][mcVersion])
+        mappings("net.fabricmc:yarn:" + [
+                11800: "1.18+build.1:v2"
+        ][mcVersion])
+    }
+
+    shade("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
+    shade("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    shade(api("com.github.KevinPriv:keventbus:master-SNAPSHOT"))
+    shade("xyz.deftu.deftils:Deftils:1.2.2")
+    shade("com.github.ben-manes.caffeine:caffeine:2.9.3")
+    shade(api("org.java-websocket:Java-WebSocket:1.5.2"))
+    shade(api("xyz.deftu.quicksocket:QuickSocket:1.0.0"))
+    shade("com.github.PhilJay:JWT:1.1.5")
+    shade(api("com.squareup.okhttp3:okhttp:4.9.3"))
+    
+    compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
+
+    shade(api("gg.essential:universalcraft-$mcVersionStr-$mcPlatform:177")) {
+        exclude module: "kotlin-stdlib-jdk8"
+        exclude module: "kotlin-reflect"
+        exclude module: "minecraft"
+        exclude module: "yarn"
+        exclude module: "fabric-loader"
+        exclude module: "fabric-api"
+        exclude module: "forge"
+    }
+    shade(api("gg.essential:elementa-$mcVersionStr-$mcPlatform:425")) {
+        exclude module: "kotlin-stdlib-jdk8"
+        exclude module: "kotlin-reflect"
+        exclude module: "minecraft"
+        exclude module: "yarn"
+        exclude module: "fabric-loader"
+        exclude module: "fabric-api"
+        exclude module: "forge"
+    }
+
+    implementation("org.apache.logging.log4j:log4j-api:2.17.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.17.0")
+}
+
+processResources {
+    inputs.property("name", projectName)
+    inputs.property("id", projectId)
+    inputs.property("version", projectVersion)
+
+    filesMatching("fabric.mod.json") {
+        expand(
+                "name": projectName,
+                "id": projectId,
+                "version": projectVersion
+        )
+    }
+
+    filesMatching("mcmod.info") {
+        expand(
+                "id": projectId,
+                "name": projectName,
+                "version": version,
+                "mcversion": minecraft.version
+        )
+    }
+
+    rename("(.+_at.cfg)", "META-INF/\$1")
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+apply from: "${rootProject.projectDir}/gradle/common/shadowrelocation.gradle"
+classes.dependsOn(processResources)

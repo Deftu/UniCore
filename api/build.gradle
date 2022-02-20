@@ -1,0 +1,8 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" apply false
+    id "com.replaymod.preprocess-root" version("7746c47")
+}
+
+preprocess {
+    createNode("1.8.9", 10809, "srg")
+}

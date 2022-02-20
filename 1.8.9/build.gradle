@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        maven { url("https://repo.woverflow.cc") }
+    }
+
+    dependencies {
+        classpath("com.github.ReplayMod:ForgeGradle:ceb83c0:all")
+        classpath("dev.isXander:MixinGradle:0.6-SNAPSHOT")
+    }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "org.spongepowered.mixin"
+apply plugin: "net.kyori.blossom"
+apply plugin: "java"
+
+sourceCompatibility = targetCompatibility = 1.8
+
+configurations {
+    compile
+    implementation.extendsFrom(compile)
+}
+
+minecraft {
+    version = "1.8.9-11.15.1.2318-1.8.9"
+    runDir = "run"
+    mappings = "stable_22"
+    makeObfSourceJar = false
+
+    clientRunArgs += "--mixin mixins.${projectId}.json"
+}
+
+blossom {
+    replaceToken("__VERSION__", projectVersion)
+}
+
+configurations {
+    shade
+    implementation.extendsFrom(shade)
+}
+
+repositories {
+    maven { url("https://repo.woverflow.cc/") }
+}
+
+dependencies {
+    shade("org.spongepowered:mixin:0.7.11-SNAPSHOT")
+    annotationProcessor("org.spongepowered:mixin:0.7.11-SNAPSHOT")
+
+    shade(project(path: ":api:1.8.9", configuration: "default"))
+}
+
+mixin {
+    disableRefMapWarning = true
+    defaultObfuscationEnv = "searge"
+    add(sourceSets.main, "mixins.${projectId}.refmap.json")
+}
+
+processResources {
+    filesMatching("mixins.${projectId}.json") {
+        expand(
+                "id": projectId
+        )
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shade]
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveClassifier.set("")
+}
+
+apply from: "${rootProject.projectDir}/gradle/common/shadowrelocation.gradle"
+jar.finalizedBy(shadowJar)
