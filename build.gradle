@@ -15,10 +15,6 @@ allprojects {
         shade
         implementation.extendsFrom(shade)
     }
-
-    repositories {
-        maven { url("https://repo.woverflow.cc/") }
-    }
     
     shadowJar {
         configurations = [project.configurations.shade]

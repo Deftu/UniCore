@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.7",
-    "package": "xyz.deftu.onecore.mixins",
+    "package": "xyz.deftu.unicore.mixins",
     "compatibilityLevel": "JAVA_8",
     "verbose": true,
     "target": "@env(CLIENT)",

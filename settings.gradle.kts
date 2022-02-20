@@ -14,7 +14,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "OneCore"
+rootProject.name = "UniCore"
 
 listOf(
     "1.8.9"
