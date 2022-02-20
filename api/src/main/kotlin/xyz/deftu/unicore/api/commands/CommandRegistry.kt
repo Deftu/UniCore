@@ -10,5 +10,7 @@ interface CommandRegistry {
     fun registerCommand(command: Class<*>) = registerCommand(command.getConstructor().newInstance())
     fun registerCommand(command: Any) = registerCommand(AnnotationCommand(argumentSerializers, command::class.java.getAnnotation(Command::class.java), command::class.java, command))
     fun <T> registerArgumentParser(type: Class<T>, parser: ArgumentSerializer<T>)
-    fun autoComplete(): Array<String>
+
+    fun processAutoComplete(input: String)
+    fun getAutoCompletion(): Array<String>
 }
