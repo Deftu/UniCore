@@ -1,14 +1,13 @@
 {
     "required": true,
     "minVersion": "0.7",
-    "package": "cc.woverflow.onecore.mixins",
+    "package": "xyz.deftu.onecore.mixins",
     "compatibilityLevel": "JAVA_8",
     "verbose": true,
     "target": "@env(CLIENT)",
     "refmap": "mixins.${id}.refmap.json",
     "mixins": [
-        "client.MinecraftMixin",
-
-        "gui.GuiScreenMixin"
+      "client.MinecraftMixin",
+      "gui.GuiScreenMixin"
     ]
 }
