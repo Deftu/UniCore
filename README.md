@@ -1,7 +1,7 @@
 <div align="center">
 
 # `UniCore`
-All-in-one Minecraft core library.\
+Minecraft core modding library made to unify all mods as one.\
 [Report a Bug][bugreps]
 ·
 [Request a Feature][featreqs]
