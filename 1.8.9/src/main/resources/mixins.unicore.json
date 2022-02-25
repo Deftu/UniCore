@@ -1,14 +1,15 @@
 {
     "required": true,
     "minVersion": "0.7",
-    "package": "xyz.deftu.unicore.mixins",
+    "package": "xyz.unifycraft.unicore.mixins",
     "compatibilityLevel": "JAVA_8",
     "verbose": true,
     "target": "@env(CLIENT)",
     "refmap": "mixins.${id}.refmap.json",
     "mixins": [
-        "client.MinecraftMixin",
-        "gui.GuiChatMixin",
-        "gui.GuiScreenMixin"
+      "client.MinecraftMixin",
+
+      "gui.GuiChatMixin",
+      "gui.GuiScreenMixin"
     ]
 }

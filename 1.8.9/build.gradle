@@ -19,6 +19,8 @@ apply plugin: "java"
 
 sourceCompatibility = targetCompatibility = 1.8
 
+archivesBaseName = "$projectName-$projectVersion-1.8.9_forge"
+
 configurations {
     compile
     implementation.extendsFrom(compile)
