@@ -7,7 +7,6 @@ import xyz.unifycraft.unicore.api.commands.annotations.*
 ) class UniCoreCommand {
     @Default
     private fun execute() {
-        println("TEST EXECUTION")
         // TODO 2022/02/14 - UniCore.getGuiHelper().showScreen(UniCoreScreen())
     }
 }

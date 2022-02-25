@@ -32,7 +32,7 @@ minecraft {
     mappings = "stable_22"
     makeObfSourceJar = false
 
-    clientRunArgs += "--mixin mixins.${projectId}.json"
+    clientRunArgs += "xyz.unifycraft.unicore.api.mixins.UniCoreDevTweaker"
 }
 
 blossom {
