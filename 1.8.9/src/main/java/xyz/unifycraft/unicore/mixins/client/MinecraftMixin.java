@@ -9,10 +9,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.unicraft.unicore.api.UniCore;
-import xyz.unicraft.unicore.api.events.InitializationEvent;
-import xyz.unifycraft.unicore.api.UniCore;
-import xyz.unifycraft.unicore.api.events.InitializationEvent;
 
 import java.io.File;
 
