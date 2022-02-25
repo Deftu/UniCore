@@ -1,0 +1,9 @@
+{
+    "unicore": "1.0.0",
+    "unicore_loader_version": "1.0.0",
+
+    "unicore_download_url": "",
+    "unicore_loader_download_url": "",
+
+    "unicore_mixins_file": "mixins.unicore.json"
+}
