@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.utils.http
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.utils.http.HttpRequester
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response

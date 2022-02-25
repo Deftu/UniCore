@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.utils
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.utils.FileHelper
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.utils.FileHelper
 import java.io.File
 
 class FileHelperImpl(

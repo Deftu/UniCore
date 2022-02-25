@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.api.commands
 
-import xyz.deftu.unicore.api.commands.annotations.Command
-import xyz.deftu.unicore.api.commands.arguments.ArgumentSerializer
+import xyz.unifycraft.unicore.api.commands.annotations.Command
+import xyz.unifycraft.unicore.api.commands.arguments.ArgumentSerializer
 
 interface CommandRegistry {
     val argumentSerializers: Map<Class<*>, ArgumentSerializer<*>>

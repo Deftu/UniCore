@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.events.*
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.events.*
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.InputEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent

@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.api.gui
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.events.*
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.events.*
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.components.UIContainer

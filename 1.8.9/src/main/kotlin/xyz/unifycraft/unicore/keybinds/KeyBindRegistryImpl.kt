@@ -3,12 +3,12 @@ package xyz.unifycraft.unicore.keybinds
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
 import me.kbrewster.eventbus.Subscribe
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.events.KeyboardInputEvent
-import xyz.deftu.unicore.api.events.MouseButtonEvent
-import xyz.deftu.unicore.api.keybinds.BaseKeyBind
-import xyz.deftu.unicore.api.keybinds.KeyBindRegistry
-import xyz.deftu.unicore.api.keybinds.KeyBindState
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.events.KeyboardInputEvent
+import xyz.unifycraft.unicore.api.events.MouseButtonEvent
+import xyz.unifycraft.unicore.api.keybinds.BaseKeyBind
+import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
+import xyz.unifycraft.unicore.api.keybinds.KeyBindState
 import java.io.File
 
 class KeyBindRegistryImpl(

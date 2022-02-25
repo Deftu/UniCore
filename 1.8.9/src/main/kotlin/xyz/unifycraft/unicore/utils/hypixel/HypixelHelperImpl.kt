@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.utils.hypixel
 
 import net.minecraft.client.Minecraft
-import xyz.deftu.unicore.api.utils.hypixel.HypixelHelper
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import java.util.regex.Pattern
 
 class HypixelHelperImpl : HypixelHelper {

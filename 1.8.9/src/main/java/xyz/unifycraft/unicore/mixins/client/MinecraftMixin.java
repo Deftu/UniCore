@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.mixins.client;
 
-import xyz.deftu.unicore.api.UniCore;
-import xyz.deftu.unicore.api.events.InitializationEvent;
+import xyz.unifycraft.unicore.api.UniCore;
+import xyz.unifycraft.unicore.api.events.InitializationEvent;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

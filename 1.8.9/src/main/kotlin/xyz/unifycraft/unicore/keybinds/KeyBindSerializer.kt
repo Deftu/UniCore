@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.keybinds
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.keybinds.BaseKeyBind
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.keybinds.BaseKeyBind
 import com.google.gson.JsonObject
 import java.io.File
 

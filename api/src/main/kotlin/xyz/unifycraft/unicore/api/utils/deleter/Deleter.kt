@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.api.utils.deleter
 
-import xyz.deftu.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.UniCore
 import gg.essential.universal.UDesktop
 import okhttp3.Request
 import okio.buffer

@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.api.gui.notifications
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.gui.ofHud
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.gui.ofHud
 import gg.essential.elementa.utils.ObservableRemoveEvent
 import java.util.concurrent.LinkedBlockingDeque
 import java.util.function.Consumer

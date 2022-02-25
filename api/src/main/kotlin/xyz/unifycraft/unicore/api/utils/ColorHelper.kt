@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.api.utils
 
-import xyz.deftu.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.UniCore
 import java.awt.Color
 
 class ColorHelper {

@@ -1,7 +1,7 @@
 package xyz.unifycraft.unicore.mixins.gui;
 
-import xyz.deftu.unicore.api.UniCore;
-import xyz.deftu.unicore.api.events.ChatSendEvent;
+import xyz.unifycraft.unicore.api.UniCore;
+import xyz.unifycraft.unicore.api.events.ChatSendEvent;
 import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

@@ -4,11 +4,11 @@ import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.Subscribe
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiChat
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.commands.BaseCommand
-import xyz.deftu.unicore.api.commands.CommandRegistry
-import xyz.deftu.unicore.api.commands.arguments.*
-import xyz.deftu.unicore.api.events.ChatSendEvent
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.commands.BaseCommand
+import xyz.unifycraft.unicore.api.commands.CommandRegistry
+import xyz.unifycraft.unicore.api.commands.arguments.*
+import xyz.unifycraft.unicore.api.events.ChatSendEvent
 
 class CommandRegistryImpl : CommandRegistry {
     override val argumentSerializers = mutableMapOf<Class<*>, ArgumentSerializer<*>>()

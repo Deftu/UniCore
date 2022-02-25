@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.commands
 
-import xyz.deftu.unicore.api.commands.annotations.*
+import xyz.unifycraft.unicore.api.commands.annotations.*
 
 @Command(
     name = "unicore"

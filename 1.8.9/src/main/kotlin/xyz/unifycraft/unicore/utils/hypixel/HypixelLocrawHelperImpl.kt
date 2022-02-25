@@ -9,11 +9,11 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import xyz.deftu.deftils.Multithreading
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.utils.hypixel.HypixelGameType
-import xyz.deftu.unicore.api.utils.hypixel.HypixelHelper
-import xyz.deftu.unicore.api.utils.hypixel.HypixelLocraw
-import xyz.deftu.unicore.api.utils.hypixel.HypixelLocrawHelper
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelGameType
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelLocraw
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelLocrawHelper
 import xyz.deftu.quicksocket.common.utils.isJson
 import java.util.concurrent.TimeUnit
 

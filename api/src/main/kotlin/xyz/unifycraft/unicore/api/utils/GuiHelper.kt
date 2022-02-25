@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.api.utils
 
-import xyz.deftu.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.UniCore
 import net.minecraft.client.gui.GuiScreen
 //#if MC<=11202
 import net.minecraftforge.common.MinecraftForge

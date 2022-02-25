@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.api.keybinds
 
-import xyz.deftu.unicore.api.keybinds.annotations.KeyBind
+import xyz.unifycraft.unicore.api.keybinds.annotations.KeyBind
 import com.google.common.collect.Multimap
 
 interface KeyBindRegistry {

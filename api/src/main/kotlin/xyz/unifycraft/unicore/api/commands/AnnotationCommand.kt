@@ -1,9 +1,9 @@
 package xyz.unifycraft.unicore.api.commands
 
-import xyz.deftu.unicore.api.commands.annotations.*
-import xyz.deftu.unicore.api.commands.arguments.ArgumentQueue
-import xyz.deftu.unicore.api.commands.arguments.ArgumentSerializer
-import xyz.deftu.unicore.api.utils.setAccess
+import xyz.unifycraft.unicore.api.commands.annotations.*
+import xyz.unifycraft.unicore.api.commands.arguments.ArgumentQueue
+import xyz.unifycraft.unicore.api.commands.arguments.ArgumentSerializer
+import xyz.unifycraft.unicore.api.utils.setAccess
 import java.lang.reflect.Method
 import java.lang.reflect.Parameter
 

@@ -3,8 +3,8 @@ package xyz.unifycraft.unicore.api.utils.updater
 //#if MC>=10809
 //$$ import net.minecraftforge.fml.common.Mod
 //#endif
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.utils.updater.fetchers.GitHubUpdateFetcher
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.utils.updater.fetchers.GitHubUpdateFetcher
 import gg.essential.universal.UDesktop
 import kotlinx.coroutines.*
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion

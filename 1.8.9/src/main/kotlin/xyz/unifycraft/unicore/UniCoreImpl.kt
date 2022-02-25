@@ -1,27 +1,27 @@
 package xyz.unifycraft.unicore
 
-import xyz.deftu.unicore.commands.CommandRegistryImpl
-import xyz.deftu.unicore.commands.UniCoreCommand
-import xyz.deftu.unicore.keybinds.KeyBindRegistryImpl
-import xyz.deftu.unicore.utils.FileHelperImpl
-import xyz.deftu.unicore.utils.http.HttpRequesterImpl
-import xyz.deftu.unicore.utils.hypixel.HypixelHelperImpl
+import xyz.unifycraft.unicore.commands.CommandRegistryImpl
+import xyz.unifycraft.unicore.commands.UniCoreCommand
+import xyz.unifycraft.unicore.keybinds.KeyBindRegistryImpl
+import xyz.unifycraft.unicore.utils.FileHelperImpl
+import xyz.unifycraft.unicore.utils.http.HttpRequesterImpl
+import xyz.unifycraft.unicore.utils.hypixel.HypixelHelperImpl
 import com.google.gson.GsonBuilder
 import me.kbrewster.eventbus.*
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
 import org.apache.logging.log4j.LogManager
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.commands.CommandRegistry
-import xyz.deftu.unicore.api.events.InitializationEvent
-import xyz.deftu.unicore.api.gui.ElementaHud
-import xyz.deftu.unicore.api.gui.notifications.Notifications
-import xyz.deftu.unicore.api.keybinds.KeyBindRegistry
-import xyz.deftu.unicore.api.utils.*
-import xyz.deftu.unicore.api.utils.deleter.Deleter
-import xyz.deftu.unicore.api.utils.http.HttpRequester
-import xyz.deftu.unicore.api.utils.hypixel.HypixelHelper
-import xyz.deftu.unicore.api.utils.updater.Updater
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.commands.CommandRegistry
+import xyz.unifycraft.unicore.api.events.InitializationEvent
+import xyz.unifycraft.unicore.api.gui.ElementaHud
+import xyz.unifycraft.unicore.api.gui.notifications.Notifications
+import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
+import xyz.unifycraft.unicore.api.utils.*
+import xyz.unifycraft.unicore.api.utils.deleter.Deleter
+import xyz.unifycraft.unicore.api.utils.http.HttpRequester
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
+import xyz.unifycraft.unicore.api.utils.updater.Updater
 
 @Mod(
     name = "UniCore",

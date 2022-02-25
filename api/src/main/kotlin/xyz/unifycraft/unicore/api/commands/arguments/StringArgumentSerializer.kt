@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.api.commands.arguments
 
-import xyz.deftu.unicore.api.commands.annotations.Greedy
+import xyz.unifycraft.unicore.api.commands.annotations.Greedy
 import java.lang.reflect.Parameter
 
 class StringArgumentSerializer : ArgumentSerializer<String> {

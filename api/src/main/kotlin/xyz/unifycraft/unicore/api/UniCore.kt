@@ -4,16 +4,16 @@ import com.google.gson.Gson
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.Logger
-import xyz.deftu.unicore.api.commands.CommandRegistry
-import xyz.deftu.unicore.api.events.InitializationEvent
-import xyz.deftu.unicore.api.gui.ElementaHud
-import xyz.deftu.unicore.api.gui.notifications.Notifications
-import xyz.deftu.unicore.api.keybinds.KeyBindRegistry
-import xyz.deftu.unicore.api.utils.*
-import xyz.deftu.unicore.api.utils.deleter.Deleter
-import xyz.deftu.unicore.api.utils.http.HttpRequester
-import xyz.deftu.unicore.api.utils.hypixel.HypixelHelper
-import xyz.deftu.unicore.api.utils.updater.Updater
+import xyz.unifycraft.unicore.api.commands.CommandRegistry
+import xyz.unifycraft.unicore.api.events.InitializationEvent
+import xyz.unifycraft.unicore.api.gui.ElementaHud
+import xyz.unifycraft.unicore.api.gui.notifications.Notifications
+import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
+import xyz.unifycraft.unicore.api.utils.*
+import xyz.unifycraft.unicore.api.utils.deleter.Deleter
+import xyz.unifycraft.unicore.api.utils.http.HttpRequester
+import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
+import xyz.unifycraft.unicore.api.utils.updater.Updater
 import java.util.*
 
 interface UniCore {

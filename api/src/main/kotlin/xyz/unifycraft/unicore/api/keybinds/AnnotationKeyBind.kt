@@ -1,10 +1,10 @@
 package xyz.unifycraft.unicore.api.keybinds
 
-import xyz.deftu.unicore.api.keybinds.annotations.Hold
-import xyz.deftu.unicore.api.keybinds.annotations.KeyBind
-import xyz.deftu.unicore.api.keybinds.annotations.Press
-import xyz.deftu.unicore.api.keybinds.annotations.Release
-import xyz.deftu.unicore.api.utils.setAccess
+import xyz.unifycraft.unicore.api.keybinds.annotations.Hold
+import xyz.unifycraft.unicore.api.keybinds.annotations.KeyBind
+import xyz.unifycraft.unicore.api.keybinds.annotations.Press
+import xyz.unifycraft.unicore.api.keybinds.annotations.Release
+import xyz.unifycraft.unicore.api.utils.setAccess
 import com.google.common.collect.ArrayListMultimap
 
 internal class AnnotationKeyBind(

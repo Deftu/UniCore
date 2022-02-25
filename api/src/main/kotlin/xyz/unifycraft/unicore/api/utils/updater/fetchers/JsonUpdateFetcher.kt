@@ -1,9 +1,9 @@
 package xyz.unifycraft.unicore.api.utils.updater.fetchers
 
-import xyz.deftu.unicore.api.UniCore
-import xyz.deftu.unicore.api.utils.updater.UpdateFetcher
-import xyz.deftu.unicore.api.utils.updater.Updater
-import xyz.deftu.unicore.api.utils.updater.UpdaterMod
+import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.utils.updater.UpdateFetcher
+import xyz.unifycraft.unicore.api.utils.updater.Updater
+import xyz.unifycraft.unicore.api.utils.updater.UpdaterMod
 import okhttp3.Request
 
 class JsonUpdateFetcher(
