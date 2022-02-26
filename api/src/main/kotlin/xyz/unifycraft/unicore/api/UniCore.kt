@@ -46,8 +46,7 @@ interface UniCore {
         var initialized = false
             @JvmStatic get
             private set
-        var instance: UniCore by service()
-            private set
+        private val instance: UniCore by service()
 
         @JvmStatic fun initialize(): Boolean {
             return if (!initialized) {

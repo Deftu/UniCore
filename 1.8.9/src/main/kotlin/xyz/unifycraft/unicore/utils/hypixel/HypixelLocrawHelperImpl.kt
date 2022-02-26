@@ -15,6 +15,7 @@ import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelLocraw
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelLocrawHelper
 import xyz.deftu.quicksocket.common.utils.isJson
+import xyz.unifycraft.unicore.api.events.HypixelLocationChangeEvent
 import java.util.concurrent.TimeUnit
 
 class HypixelLocrawHelperImpl(
@@ -22,6 +23,7 @@ class HypixelLocrawHelperImpl(
 ) : HypixelLocrawHelper {
     override var locraw: HypixelLocraw? = null
     private var tickCounter = 0
+    private var sendPermitted = false
     private var checked = false
     private var limboLoop = 0
 
@@ -30,12 +32,16 @@ class HypixelLocrawHelperImpl(
     }
 
     override fun enqueueUpdate(interval: Long) {
+        sendPermitted = true
         Multithreading.schedule({
-            Minecraft.getMinecraft().thePlayer.sendChatMessage("/locraw")
+            if (sendPermitted) {
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/locraw")
+            }
         }, interval, TimeUnit.MILLISECONDS)
     }
 
-    @SubscribeEvent fun onClientTick(event: TickEvent.ClientTickEvent) {
+    @SubscribeEvent
+    fun onClientTick(event: TickEvent.ClientTickEvent) {
         tickCounter++
         if (tickCounter % 20 == 0) {
             tickCounter = 0
@@ -46,13 +52,16 @@ class HypixelLocrawHelperImpl(
         }
     }
 
-    @SubscribeEvent fun onWorldLoad(event: WorldEvent.Load) {
+    @SubscribeEvent
+    fun onWorldLoad(event: WorldEvent.Load) {
         locraw = null
+        sendPermitted = false
         checked = false
         limboLoop = 0
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH, receiveCanceled = true) fun onChatMessageReceived(event: ClientChatReceivedEvent) {
+    @SubscribeEvent(priority = EventPriority.HIGH, receiveCanceled = true)
+    fun onChatMessageReceived(event: ClientChatReceivedEvent) {
         if (!checked) return
         val stripped = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.unformattedText)
         if (!stripped.isJson()) {
@@ -65,12 +74,13 @@ class HypixelLocrawHelperImpl(
         val raw = UniCore.getJsonHelper().parse(stripped)
         if (!raw.isJsonObject) return
         val json = raw.asJsonObject
-        val parsed = UniCore.getGson().fromJson(json, HypixelLocraw::class.java)
+        val parsed = UniCore.getGson().fromJson(json, HypixelLocraw::class.java) ?: return
         if (parsed.gameType == HypixelGameType.LIMBO) {
             checked = false
             limboLoop++
             enqueueUpdate(1000)
         } else locraw = parsed
+        UniCore.getEventBus().post(HypixelLocationChangeEvent(parsed))
         event.isCanceled = true
     }
 }
