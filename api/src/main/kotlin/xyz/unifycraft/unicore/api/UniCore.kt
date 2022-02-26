@@ -15,7 +15,6 @@ import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.updater.Updater
 import java.util.*
-import kotlin.reflect.KProperty
 
 interface UniCore {
     fun initialize(event: InitializationEvent)
@@ -47,17 +46,11 @@ interface UniCore {
         var initialized = false
             @JvmStatic get
             private set
-        var instance: UniCore by instance()
+        var instance: UniCore by service()
             private set
 
         @JvmStatic fun initialize(): Boolean {
             return if (!initialized) {
-                val service = ServiceLoader.load(UniCore::class.java)
-                val iterator = service.iterator()
-                if (iterator.hasNext()) {
-                    instance = iterator.next()
-                    if (iterator.hasNext()) throw IllegalStateException("There is more than one implementation, this is not supported.")
-                } else throw IllegalStateException("Couldn't find implementation.")
                 instance.eventBus().register(this)
                 true.also { initialized = true }
             } else false

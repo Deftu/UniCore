@@ -51,6 +51,7 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
     private lateinit var colorHelper: ColorHelper
 
     override fun initialize(event: InitializationEvent) {
+        logger.info("Hello, UniCore!")
         MinecraftForge.EVENT_BUS.register(ForgeEventExtender())
 
         fileHelper = FileHelperImpl(event.gameDir)
