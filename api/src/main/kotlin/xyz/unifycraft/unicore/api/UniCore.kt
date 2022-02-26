@@ -47,7 +47,7 @@ interface UniCore {
         var initialized = false
             @JvmStatic get
             private set
-        var instance: UniCore by InstanceDelegator.instance()
+        var instance: UniCore by instance()
             private set
 
         @JvmStatic fun initialize(): Boolean {
@@ -87,22 +87,5 @@ interface UniCore {
         @JvmStatic fun getHypixelHelper() = instance.hypixelHelper()
         @JvmStatic fun getInternetHelper() = instance.internetHelper()
         @JvmStatic fun getColorHelper() = instance.colorHelper()
-
-        private class InstanceDelegator {
-            private lateinit var instance: UniCore
-
-            operator fun getValue(ref: UniCore.Companion, property: KProperty<*>): UniCore {
-                if (this::instance.isInitialized) throw IllegalAccessException("The UniCore instance has not been initialized yet.")
-                else return instance
-            }
-
-            operator fun setValue(ref: UniCore.Companion, property: KProperty<*>, value: UniCore) {
-                instance = value
-            }
-
-            companion object {
-                fun instance() = InstanceDelegator()
-            }
-        }
     }
 }

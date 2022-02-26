@@ -1,6 +1,9 @@
 package xyz.unifycraft.unicore.api.utils
 
 import gg.essential.universal.UGraphics
+import xyz.unifycraft.unicore.api.UniCore
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 inline fun <T, R> T.newMatrix(block: T.() -> R) {
     UGraphics.GL.pushMatrix()
@@ -31,4 +34,19 @@ inline fun <T, R> T.withTranslate(x: Float, y: Float, z: Float, block: T.() -> R
 inline fun <T, R> T.withRotation(angle: Float, x: Float, y: Float, z: Float, block: T.() -> R) = newMatrix {
     UGraphics.GL.rotate(angle, x, y, z)
     block.invoke(this)
+}
+
+fun <T> instance() = DelayedInstanceDelegator<T>()
+
+class DelayedInstanceDelegator<T> : ReadWriteProperty<Any?, T> {
+    private var instance: T? = null
+
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
+        if (instance == null) throw IllegalAccessException("This instance has not been initialized yet.")
+        else return instance!!
+    }
+
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        instance = value
+    }
 }
