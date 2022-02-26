@@ -115,7 +115,7 @@ data class UpdateVersion(val version: String, val url: String? = null) : Compara
 //$$     clz: Class<*>,
 //$$     path: String,
 //$$     file: File
-//$$ ) {
+//$$ ): UpdaterMod {
 //$$     if (clz.isAnnotationPresent(Mod::class.java)) {
 //$$         val mod = clz.getAnnotation(Mod::class.java)
 //$$         return UpdaterMod(mod.name, mod.version, mod.modid, path, file)
