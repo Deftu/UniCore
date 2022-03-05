@@ -10,6 +10,10 @@ compileJava.options.encoding = "UTF-8"
 
 allprojects {
     apply plugin: "com.github.johnrengelman.shadow"
+
+    ext {
+        defaultShadow = true
+    }
     
     configurations {
         shade
@@ -30,5 +34,7 @@ allprojects {
         archiveClassifier.set("")
     }
     
-    jar.finalizedBy(shadowJar)
+    if (defaultShadow) {
+        jar.finalizedBy(shadowJar)
+    }
 }

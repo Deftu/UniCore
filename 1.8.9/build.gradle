@@ -19,7 +19,7 @@ apply plugin: "java"
 
 sourceCompatibility = targetCompatibility = 1.8
 
-archivesBaseName = "$projectName-$projectVersion-1.8.9_forge"
+archivesBaseName = "$projectName-1.8.9-forge"
 
 configurations {
     compile
@@ -73,7 +73,9 @@ shadowJar {
     configurations = [project.configurations.shade]
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveClassifier.set("")
+    archiveVersion.set(projectVersion)
 }
 
 apply from: "${rootProject.projectDir}/gradle/common/shadowrelocation.gradle"
-jar.finalizedBy(shadowJar)
+defaultShadow = false
+reobfJar.finalizedBy(shadowJar)
