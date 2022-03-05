@@ -133,29 +133,23 @@ dependencies {
     shade("com.github.ben-manes.caffeine:caffeine:2.9.3")
     shade(api("org.java-websocket:Java-WebSocket:1.5.2"))
     shade(api("xyz.deftu.quicksocket:QuickSocket:1.0.0"))
-    shade("com.github.PhilJay:JWT:1.1.5")
     shade("org.beryx:awt-color-factory:1.0.1")
     shade(api("com.squareup.okhttp3:okhttp:4.9.3"))
     
     compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
 
-    shade(api("gg.essential:universalcraft-$mcVersionStr-$mcPlatform:177")) {
+    shade(api("xyz.unifycraft.confide:Confide-${mcVersionStr}-${mcPlatform}:1.0.0")) {
         exclude module: "kotlin-stdlib-jdk8"
         exclude module: "kotlin-reflect"
-        exclude module: "minecraft"
-        exclude module: "yarn"
-        exclude module: "fabric-loader"
-        exclude module: "fabric-api"
-        exclude module: "forge"
+        exclude module: "elementa-$mcVersionStr-$mcPlatform"
+    }
+    shade(api("gg.essential:universalcraft-$mcVersionStr-$mcPlatform:181")) {
+        exclude module: "kotlin-stdlib-jdk8"
     }
     shade(api("gg.essential:elementa-$mcVersionStr-$mcPlatform:425")) {
         exclude module: "kotlin-stdlib-jdk8"
         exclude module: "kotlin-reflect"
-        exclude module: "minecraft"
-        exclude module: "yarn"
-        exclude module: "fabric-loader"
-        exclude module: "fabric-api"
-        exclude module: "forge"
+        exclude module: "universalcraft-$mcVersionStr-$mcPlatform"
     }
 
     implementation("org.apache.logging.log4j:log4j-api:2.17.0")

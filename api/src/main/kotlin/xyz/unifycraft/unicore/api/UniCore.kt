@@ -19,15 +19,12 @@ import java.util.*
 interface UniCore {
     fun initialize(event: InitializationEvent)
 
-    fun version() = "__VERSION__"
-    fun name() = "UniCore"
-    fun id() = "unicore"
-
     fun logger(): Logger
     fun gson(): Gson
     fun eventBus(): EventBus
 
     fun fileHelper(): FileHelper
+    fun config(): UniCoreConfig
     fun jsonHelper(): JsonHelper
     fun guiHelper(): GuiHelper
     fun elementaHud(): ElementaHud
@@ -57,15 +54,16 @@ interface UniCore {
 
         @Subscribe private fun onInitialize(event: InitializationEvent) = instance.initialize(event)
 
-        @JvmStatic fun getVersion() = instance.version()
-        @JvmStatic fun getName() = instance.name()
-        @JvmStatic fun getId() = instance.id()
+        @JvmStatic fun getVersion() = "__VERSION__"
+        @JvmStatic fun getName() = "UniCore"
+        @JvmStatic fun getId() = "unicore"
 
         @JvmStatic fun getLogger() = instance.logger()
         @JvmStatic fun getGson() = instance.gson()
         @JvmStatic fun getEventBus() = instance.eventBus()
 
         @JvmStatic fun getFileHelper() = instance.fileHelper()
+        @JvmStatic fun getConfig() = instance.config()
         @JvmStatic fun getJsonHelper() = instance.jsonHelper()
         @JvmStatic fun getGuiHelper() = instance.guiHelper()
         @JvmStatic fun getElementaHud() = instance.elementaHud()

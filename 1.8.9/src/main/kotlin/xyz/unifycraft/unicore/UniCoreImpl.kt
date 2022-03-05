@@ -12,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
 import org.apache.logging.log4j.LogManager
 import xyz.unifycraft.unicore.api.UniCore
+import xyz.unifycraft.unicore.api.UniCoreConfig
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
@@ -29,13 +30,14 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
     modid = "unicore",
     clientSideOnly = true
 ) class UniCoreImpl : UniCore {
-    private val logger = LogManager.getLogger(name())
+    private val logger = LogManager.getLogger(UniCore.getName())
     private val gson = GsonBuilder()
         .setPrettyPrinting()
         .create()
     private val eventBus = eventbus {  }
 
     private lateinit var fileHelper: FileHelper
+    private lateinit var config: UniCoreConfig
     private lateinit var jsonHelper: JsonHelper
     private lateinit var guiHelper: GuiHelper
     private lateinit var elementaHud: ElementaHud
@@ -51,10 +53,11 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
     private lateinit var colorHelper: ColorHelper
 
     override fun initialize(event: InitializationEvent) {
-        logger.info("Hello, UniCore!")
+        logger.info("Hello, Minecraft!")
         MinecraftForge.EVENT_BUS.register(ForgeEventExtender())
 
         fileHelper = FileHelperImpl(event.gameDir)
+        config = UniCoreConfig().also { it.initialize() }
         jsonHelper = JsonHelper()
         guiHelper = GuiHelper()
         elementaHud = ElementaHud().also { it.initialize() }
@@ -75,6 +78,7 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
     override fun eventBus() = eventBus
 
     override fun fileHelper() = fileHelper
+    override fun config() = config
     override fun jsonHelper() = jsonHelper
     override fun guiHelper() = guiHelper
     override fun elementaHud() = elementaHud

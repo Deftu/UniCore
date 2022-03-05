@@ -43,7 +43,7 @@ class HypixelHelperImpl : HypixelHelper {
 
     @SubscribeEvent
     fun onChatReceived(event: ClientChatReceivedEvent) {
-        if (isHypixel() /* && UniCore.getConfig().saveHypixelApiKeys */) {
+        if (isHypixel()  && UniCore.getConfig().saveHypixelApiKeys) {
             val msg = event.message.unformattedText
             val matcher = hypixelApiKeyPattern.matcher(msg)
             if (!matcher.find()) return
@@ -55,16 +55,16 @@ class HypixelHelperImpl : HypixelHelper {
                     .url("https://api.hypixel.net/key?key=$apiKey")
                     .build()) { response ->
                     response.body?.use { body ->
-                        val failure = { UniCore.getNotifications().post(UniCore.getName(), "Failed to set up your Hypixel API key.") }
+                        val failure = { reason: String -> UniCore.getNotifications().post(UniCore.getName(), "Failed to set up your Hypixel API key. ($reason)") }
                         val str = body.string()
-                        if (!str.isJson()) failure.invoke().also { return@use }
+                        if (!str.isJson()) failure.invoke("Hypixel provided an invalid JSON response.").also { return@use }
                         val raw = str.toJson()
-                        if (!raw.isJsonObject) failure.invoke().also { return@use }
+                        if (!raw.isJsonObject) failure.invoke("Hypixel provided an invalid JSON type, expected object, got ${raw::class.java.simpleName}.").also { return@use }
                         val json = raw.asJsonObject
-                        if (!json.has("success")) failure.invoke().also { return@use }
+                        if (!json.has("success")) failure.invoke("Hypixel provided an invalid JSON response, missing API key status.").also { return@use }
                         val success = json.get("success")
-                        if (!success.isJsonPrimitive) failure.invoke().also { return@use }
-                        if (!success.asJsonPrimitive.asBoolean) failure.invoke().also { return@use }
+                        if (!success.isJsonPrimitive) failure.invoke("Hypixel provided an invalid JSON response, API key status is invalid.").also { return@use }
+                        if (!success.asJsonPrimitive.asBoolean) failure.invoke("Hypixel provided an invalid JSON response, API key status is not a boolean.").also { return@use }
                         this.apiKey = apiKey
                         UniCore.getEventBus().post(HypixelApiKeyEvent(apiKey))
                         UniCore.getNotifications().post(UniCore.getName(), "Successfully set up your Hypixel API key.")
