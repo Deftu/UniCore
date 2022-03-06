@@ -1,5 +1,6 @@
 package xyz.unifycraft.unicore.commands
 
+import net.minecraft.client.Minecraft
 import xyz.unifycraft.unicore.api.commands.annotations.*
 
 @Command(

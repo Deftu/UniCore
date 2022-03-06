@@ -1,6 +1,7 @@
 package xyz.unifycraft.unicore.api
 
 import com.google.gson.Gson
+import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.Logger
@@ -57,6 +58,12 @@ interface UniCore {
         @JvmStatic fun getVersion() = "__VERSION__"
         @JvmStatic fun getName() = "UniCore"
         @JvmStatic fun getId() = "unicore"
+
+        private val chatPrefix = chatPrefix {
+            name = getName()
+            color = ChatColor.BLUE
+        }
+        @JvmStatic fun getChatPrefix() = chatPrefix
 
         @JvmStatic fun getLogger() = instance.logger()
         @JvmStatic fun getGson() = instance.gson()

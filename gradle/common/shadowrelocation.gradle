@@ -9,9 +9,7 @@ shadowJar {
     relocate("gg.essential.elementa", "${base}.elementa")
     relocate("org.java_websocket", "${base}.websocket")
     relocate("xyz.deftu.deftils", "${base}.deftils")
-    relocate("org.apache.logging", "${base}.log4j")
     relocate("com.google.gson", "${base}.gson")
-    relocate("com.philjay.jwt", "${base}.jwt")
     relocate("okhttp3", "${base}.okhttp")
     relocate("okio", "${base}.okio")
 }
