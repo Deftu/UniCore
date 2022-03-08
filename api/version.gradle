@@ -112,6 +112,12 @@ if (FABRIC) {
     }
 }
 
+if (FABRIC) {
+    configurations {
+        modImplementation.extendsFrom(shade)
+    }
+}
+
 blossom {
     replaceToken("__VERSION__", projectVersion)
 }
