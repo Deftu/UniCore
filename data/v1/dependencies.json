@@ -1,0 +1,15 @@
+[
+    {
+        "maven": true,
+        "repository": "https://jitpack.io/",
+        "group": "com.github.KevinPriv",
+        "artifact": "keventbus",
+        "version": "master-SNAPSHOT"
+    },
+    {
+        "maven": true,
+        "group": "xyz.deftu.deftils",
+        "artifact": "Deftils",
+        "version": "1.2.2"
+    }
+]

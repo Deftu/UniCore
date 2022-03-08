@@ -1,0 +1,14 @@
+[
+    {
+        "maven": true,
+        "group": "org.jetbrains.kotlin",
+        "artifact": "kotlin-stdlib-jdk8",
+        "version": "1.6.10"
+    },
+    {
+        "maven": true,
+        "group": "org.jetbrains.kotlinx",
+        "artifact": "kotlinx-coroutines-core",
+        "version": "1.6.0-native-mt"
+    }
+]
