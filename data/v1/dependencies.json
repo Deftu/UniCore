@@ -1,15 +1,51 @@
 [
     {
-        "maven": true,
         "repository": "https://jitpack.io/",
         "group": "com.github.KevinPriv",
         "artifact": "keventbus",
         "version": "master-SNAPSHOT"
     },
     {
-        "maven": true,
         "group": "xyz.deftu.deftils",
         "artifact": "Deftils",
         "version": "1.2.2"
+    },
+    {
+        "group": "com.github.ben-manes.caffeine",
+        "artifact": "caffeine",
+        "version": "2.9.3"
+    },
+    {
+        "group": "org.java-websocket",
+        "artifact": "Java-WebSocket",
+        "version": "1.5.2"
+    },
+    {
+        "group": "xyz.deftu.quicksocket",
+        "artifact": "QuickSocket",
+        "version": "1.0.0"
+    },
+    {
+        "group": "com.squareup.okhttp3",
+        "artifact": "okhttp",
+        "version": "4.9.3"
+    },
+    {
+        "repository": "https://repo.sk1er.club/repository/maven-public/",
+        "group": "gg.essential",
+        "artifact": "universalcraft-{mcversion}-{platform}",
+        "version": "181"
+    },
+    {
+        "repository": "https://repo.sk1er.club/repository/maven-public/",
+        "group": "gg.essential",
+        "artifact": "elementa-{mcversion}-{platform}",
+        "version": "425"
+    },
+    {
+        "repository": "https://repo.spongepowered.org/maven/",
+        "group": "org.spongepowered",
+        "artifact": "mixin",
+        "version": "0.7.11-SNAPSHOT"
     }
 ]
