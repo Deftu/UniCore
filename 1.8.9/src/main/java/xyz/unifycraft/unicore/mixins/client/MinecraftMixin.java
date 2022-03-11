@@ -1,7 +1,9 @@
 package xyz.unifycraft.unicore.mixins.client;
 
 import org.apache.logging.log4j.Logger;
+import xyz.unifycraft.unicore.UniCoreDiImpl;
 import xyz.unifycraft.unicore.api.UniCore;
+import xyz.unifycraft.unicore.api.UniCoreDi;
 import xyz.unifycraft.unicore.api.events.InitializationEvent;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Final;
@@ -21,6 +23,7 @@ public class MinecraftMixin {
 
     @Inject(method = "startGame", at = @At("HEAD"))
     private void onGamePreStarted(CallbackInfo ci) {
+        UniCoreDi.initialize(new UniCoreDiImpl());
         if (!UniCore.initialize()) throw new IllegalStateException(UniCore.getName() + " was already initialized. How?");
         else logger.info("Hello, " + UniCore.getName() + "!");
     }

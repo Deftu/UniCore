@@ -135,6 +135,8 @@ dependencies {
     shade("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
     shade("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    shade("org.kodein.di:kodein-di:7.10.0")
+
     shade(api("com.github.KevinPriv:keventbus:master-SNAPSHOT"))
     shade("xyz.deftu.deftils:Deftils:1.2.2")
     shade("com.github.ben-manes.caffeine:caffeine:2.9.3")

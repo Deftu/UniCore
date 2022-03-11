@@ -5,6 +5,7 @@ import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.Logger
+import org.kodein.di.instance
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
@@ -15,7 +16,6 @@ import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.updater.Updater
-import java.util.*
 
 interface UniCore {
     fun initialize(event: InitializationEvent)
@@ -44,7 +44,7 @@ interface UniCore {
         var initialized = false
             @JvmStatic get
             private set
-        private val instance: UniCore by service()
+        private val instance: UniCore by UniCoreDi.instance.instance()
 
         @JvmStatic fun initialize(): Boolean {
             return if (!initialized) {
