@@ -12,7 +12,9 @@ import me.kbrewster.eventbus.*
 import net.minecraft.client.Minecraft
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.common.ProgressManager
 import org.apache.logging.log4j.LogManager
+import xyz.deftu.quicksocket.common.utils.QuickSocketJsonHandler
 import xyz.unifycraft.unicore.api.UniCore
 import xyz.unifycraft.unicore.api.UniCoreConfig
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
@@ -26,6 +28,7 @@ import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.updater.Updater
 import xyz.unifycraft.unicore.cloud.CloudConnection
+import xyz.unifycraft.unicore.quicksocket.JsonParser
 import xyz.unifycraft.unicore.utils.updater.UpdaterEventListener
 import java.util.UUID
 
@@ -60,12 +63,15 @@ import java.util.UUID
     private lateinit var cloudConnection: CloudConnection
 
     override fun initialize(event: InitializationEvent) {
+        val progressBar = ProgressManager.push(UniCore.getName(), 3)
         logger.info("Hello, Minecraft!")
+        progressBar.step("Extending Forge events")
         listOf(
             ForgeEventExtender(),
             UpdaterEventListener()
         ).forEach(MinecraftForge.EVENT_BUS::register)
 
+        progressBar.step("Initializing APIs")
         fileHelper = FileHelperImpl(event.gameDir)
         config = UniCoreConfig().also { it.initialize() }
         jsonHelper = JsonHelper()
@@ -82,10 +88,18 @@ import java.util.UUID
         internetHelper = InternetHelper()
         colorHelper = ColorHelper()
 
+        progressBar.step("Connecting to the UniCore Cloud")
+        QuickSocketJsonHandler.applyJsonParser(JsonParser())
         cloudConnection = CloudConnection(
-            proposedSessionId = UUID.randomUUID(),
+            sessionId = UUID.randomUUID(),
             headers = arrayOf("uuid" to Minecraft.getMinecraft().session.profile.id.toString())
-        )
+        ).apply {
+            connectBlocking()
+        }
+    }
+
+    override fun withInstance(instance: UniCore) {
+        UniCoreImpl.instance = instance as UniCoreImpl
     }
 
     override fun logger() = logger
@@ -109,4 +123,9 @@ import java.util.UUID
     override fun colorHelper() = colorHelper
 
     fun cloudConnection() = cloudConnection
+
+    companion object {
+        lateinit var instance: UniCoreImpl
+            private set
+    }
 }

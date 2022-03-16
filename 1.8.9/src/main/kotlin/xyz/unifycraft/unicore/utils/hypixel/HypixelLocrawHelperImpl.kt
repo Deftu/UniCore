@@ -9,12 +9,12 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import xyz.deftu.deftils.Multithreading
+import xyz.deftu.quicksocket.common.utils.QuickSocketJsonHandler
 import xyz.unifycraft.unicore.api.UniCore
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelGameType
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelLocraw
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelLocrawHelper
-import xyz.deftu.quicksocket.common.utils.isJson
 import xyz.unifycraft.unicore.api.events.HypixelLocationChangeEvent
 import java.util.concurrent.TimeUnit
 
@@ -64,7 +64,7 @@ class HypixelLocrawHelperImpl(
     fun onChatMessageReceived(event: ClientChatReceivedEvent) {
         if (!checked) return
         val stripped = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.unformattedText)
-        if (!stripped.isJson()) {
+        if (!QuickSocketJsonHandler.parser.isValidJson(stripped)) {
             if (stripped.contains("You are sending too many commands! Please try again in a few seconds.")) {
                 enqueueUpdate(5000)
                 return

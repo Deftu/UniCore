@@ -6,7 +6,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import okhttp3.Request
 import xyz.deftu.deftils.Multithreading
-import xyz.deftu.quicksocket.common.utils.isJson
+import xyz.deftu.quicksocket.common.utils.QuickSocketJsonHandler
 import xyz.unifycraft.unicore.api.UniCore
 import xyz.unifycraft.unicore.api.events.HypixelApiKeyEvent
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelGameType
@@ -57,7 +57,7 @@ class HypixelHelperImpl : HypixelHelper {
                     response.body?.use { body ->
                         val failure = { reason: String -> UniCore.getNotifications().post(UniCore.getName(), "Failed to set up your Hypixel API key. ($reason)") }
                         val str = body.string()
-                        if (!str.isJson()) failure.invoke("Hypixel provided an invalid JSON response.").also { return@use }
+                        if (!QuickSocketJsonHandler.parser.isValidJson(str)) failure.invoke("Hypixel provided an invalid JSON response.").also { return@use }
                         val raw = str.toJson()
                         if (!raw.isJsonObject) failure.invoke("Hypixel provided an invalid JSON type, expected object, got ${raw::class.java.simpleName}.").also { return@use }
                         val json = raw.asJsonObject

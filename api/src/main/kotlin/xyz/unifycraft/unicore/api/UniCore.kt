@@ -19,6 +19,7 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
 
 interface UniCore {
     fun initialize(event: InitializationEvent)
+    fun withInstance(instance: UniCore)
 
     fun logger(): Logger
     fun gson(): Gson
@@ -48,6 +49,7 @@ interface UniCore {
 
         @JvmStatic fun initialize(): Boolean {
             return if (!initialized) {
+                instance.withInstance(instance)
                 instance.eventBus().register(this)
                 true.also { initialized = true }
             } else false

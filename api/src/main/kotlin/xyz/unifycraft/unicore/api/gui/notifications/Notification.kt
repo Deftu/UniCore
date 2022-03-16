@@ -95,7 +95,6 @@ class Notification(
             )
 
             onComplete {
-                println("Yo!")
                 animateOut()
             }
         }

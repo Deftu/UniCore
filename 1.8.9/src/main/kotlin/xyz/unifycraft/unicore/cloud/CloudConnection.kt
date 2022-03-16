@@ -5,9 +5,11 @@ import kotlinx.coroutines.runBlocking
 import org.apache.logging.log4j.LogManager
 import org.java_websocket.handshake.ServerHandshake
 import xyz.deftu.quicksocket.client.QuickSocketClient
+import xyz.deftu.quicksocket.common.CloseCode
 import xyz.deftu.quicksocket.common.packets.PacketBase
 import xyz.unifycraft.unicore.api.UniCore
 import xyz.unifycraft.unicore.api.UniCoreEnvironment
+import xyz.unifycraft.unicore.cloud.packets.PacketKeepAlive
 import java.util.UUID
 
 class CloudConnection(
@@ -19,7 +21,12 @@ class CloudConnection(
 ) {
     private val logger = LogManager.getLogger("${UniCore.getName()} (Cloud Connection)")
 
+    init {
+        addPacket("KEEP_ALIVE", PacketKeepAlive::class.java)
+    }
+
     override fun onConnectionOpened(handshake: ServerHandshake) {
+        handshake.iterateHttpFields().forEachRemaining(logger::warn)
         if (!handshake.hasFieldValue(acceptedSessionIdName)) throw IllegalConnectionException("The connection that the UniCore cloud connected to did not provide a session ID.")
         val acceptedSessionId = handshake.getFieldValue(acceptedSessionIdName).toBoolean()
         if (!acceptedSessionId) runBlocking {
@@ -27,7 +34,13 @@ class CloudConnection(
             sessionId = UUID.fromString(handshake.getFieldValue(sessionIdName))
         }
 
-        logger.info("Successfully established connection to ${UniCore.getName()} cloud!")
+        logger.info("Successfully established connection to ${UniCore.getName()} Cloud!")
+    }
+
+    override fun onConnectionClosed(code: CloseCode, reason: String, remote: Boolean) {
+        if (code == CloseCode.PROTOCOL_ERROR)
+            UniCore.getNotifications().post("${UniCore.getName()} Cloud", "Failed to connect to the UniCore Cloud.")
+        logger.warn("Connection to ${UniCore.getName()} Cloud closed. ($code - $reason)")
     }
 
     override fun onPacketSent(packet: PacketBase, data: JsonObject) =
