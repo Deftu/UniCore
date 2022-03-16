@@ -7,7 +7,7 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
 import xyz.unifycraft.unicore.api.utils.updater.UpdaterMod
 import okhttp3.Request
 
-object GitHubUpdateFetcher : UpdateFetcher {
+class GitHubUpdateFetcher : UpdateFetcher {
     private var hasUpdate = false
 
     override suspend fun check(updater: Updater, mod: UpdaterMod) {

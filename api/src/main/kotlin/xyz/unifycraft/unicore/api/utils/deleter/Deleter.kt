@@ -6,6 +6,7 @@ import okhttp3.Request
 import okio.buffer
 import okio.sink
 import org.apache.logging.log4j.LogManager
+import xyz.unifycraft.unicore.api.UniCoreEnvironment
 import java.io.File
 
 
@@ -24,7 +25,7 @@ class Deleter(
 
         val request = Request.Builder()
             .get()
-            .url("https://api.github.com/repos/${System.getProperty("unicore.deleter.repo", "Deftu/Deleter")}/releases/latest")
+            .url("https://api.github.com/repos/${UniCoreEnvironment.deleterRepo}/releases/latest")
             .build()
         UniCore.getHttpRequester().request(request) {
             it.body?.let { body ->

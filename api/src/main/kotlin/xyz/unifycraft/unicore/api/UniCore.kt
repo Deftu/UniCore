@@ -5,7 +5,7 @@ import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.Logger
-import org.kodein.di.instance
+import org.kodein.di.*
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
@@ -62,6 +62,9 @@ interface UniCore {
         private val chatPrefix = chatPrefix {
             name = getName()
             color = ChatColor.BLUE
+            brackets {
+                type = ChatPrefixType.CARET
+            }
         }
         @JvmStatic fun getChatPrefix() = chatPrefix
 

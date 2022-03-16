@@ -1,6 +1,7 @@
 package xyz.unifycraft.unicore.api.utils
 
 import gg.essential.universal.UGraphics
+import java.awt.Color
 import java.util.*
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -20,6 +21,9 @@ inline fun <T, R> T.withColor(rgba: Int, block: T.() -> R) = newMatrix {
     )
     block.invoke(this)
 }
+
+inline fun <T, R> T.withColor(color: Color, block: T.() -> R) =
+    withColor(color.rgb, block)
 
 inline fun <T, R> T.withScale(xScale: Float, yScale: Float, zScale: Float, block: T.() -> R) = newMatrix {
     UGraphics.GL.translate(xScale, yScale, zScale)

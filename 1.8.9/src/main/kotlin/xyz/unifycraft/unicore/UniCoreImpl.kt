@@ -7,7 +7,9 @@ import xyz.unifycraft.unicore.utils.FileHelperImpl
 import xyz.unifycraft.unicore.utils.http.HttpRequesterImpl
 import xyz.unifycraft.unicore.utils.hypixel.HypixelHelperImpl
 import com.google.gson.GsonBuilder
+import gg.essential.universal.wrappers.UPlayer
 import me.kbrewster.eventbus.*
+import net.minecraft.client.Minecraft
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
 import org.apache.logging.log4j.LogManager
@@ -23,6 +25,9 @@ import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.updater.Updater
+import xyz.unifycraft.unicore.cloud.CloudConnection
+import xyz.unifycraft.unicore.utils.updater.UpdaterEventListener
+import java.util.UUID
 
 @Mod(
     name = "UniCore",
@@ -52,9 +57,14 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
     private lateinit var internetHelper: InternetHelper
     private lateinit var colorHelper: ColorHelper
 
+    private lateinit var cloudConnection: CloudConnection
+
     override fun initialize(event: InitializationEvent) {
         logger.info("Hello, Minecraft!")
-        MinecraftForge.EVENT_BUS.register(ForgeEventExtender())
+        listOf(
+            ForgeEventExtender(),
+            UpdaterEventListener()
+        ).forEach(MinecraftForge.EVENT_BUS::register)
 
         fileHelper = FileHelperImpl(event.gameDir)
         config = UniCoreConfig().also { it.initialize() }
@@ -71,6 +81,11 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
         hypixelHelper = HypixelHelperImpl()
         internetHelper = InternetHelper()
         colorHelper = ColorHelper()
+
+        cloudConnection = CloudConnection(
+            proposedSessionId = UUID.randomUUID(),
+            headers = arrayOf("uuid" to Minecraft.getMinecraft().session.profile.id.toString())
+        )
     }
 
     override fun logger() = logger
@@ -92,4 +107,6 @@ import xyz.unifycraft.unicore.api.utils.updater.Updater
     override fun hypixelHelper() = hypixelHelper
     override fun internetHelper() = internetHelper
     override fun colorHelper() = colorHelper
+
+    fun cloudConnection() = cloudConnection
 }

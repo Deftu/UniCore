@@ -141,7 +141,7 @@ dependencies {
     shade("xyz.deftu.deftils:Deftils:1.2.2")
     shade("com.github.ben-manes.caffeine:caffeine:2.9.3")
     shade(api("org.java-websocket:Java-WebSocket:1.5.2"))
-    shade(api("xyz.deftu.quicksocket:QuickSocket:1.0.0"))
+    shade(api("xyz.deftu.quicksocket:QuickSocket:1.2.0"))
     shade(api("com.squareup.okhttp3:okhttp:4.9.3"))
     
     compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")

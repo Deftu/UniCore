@@ -1,5 +1,6 @@
 package xyz.unifycraft.unicore.api.utils
 
+import net.minecraft.client.Minecraft
 import xyz.unifycraft.unicore.api.UniCore
 import net.minecraft.client.gui.GuiScreen
 //#if MC<=11202
@@ -25,8 +26,10 @@ class GuiHelper {
     }
 
     //#if MC<=11202
-    @SubscribeEvent fun onClientTick(event: TickEvent.ClientTickEvent) {
+    @SubscribeEvent
+    fun onClientTick(event: TickEvent.ClientTickEvent) {
         if (screen !is PlaceholderScreen) {
+            Minecraft.getMinecraft().displayGuiScreen(screen)
             screen = PlaceholderScreen()
             MinecraftForge.EVENT_BUS.unregister(this)
         }
