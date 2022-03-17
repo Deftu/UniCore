@@ -1,8 +1,5 @@
 package xyz.unifycraft.unicore.api.utils.updater
 
-//#if MC>=10809
-//$$ import net.minecraftforge.fml.common.Mod
-//#endif
 import gg.essential.universal.UDesktop
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers

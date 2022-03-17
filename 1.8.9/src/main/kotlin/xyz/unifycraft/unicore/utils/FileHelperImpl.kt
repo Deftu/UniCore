@@ -11,10 +11,21 @@ class FileHelperImpl(
         get() = File(
             gameDir,
             "config"
-        ).also { if (!it.exists() && !it.mkdirs()) throw IllegalStateException("Failed to create mod configurations directory.") }
-    override val dataDir: File
+        ).apply(fileChecks)
+    override val orgDir: File
         get() = File(
             gameDir,
+            "UnifyCraft"
+        ).apply(fileChecks)
+    override val dataDir: File
+        get() = File(
+            orgDir,
             UniCore.getName()
-        ).also { if (!it.exists() && !it.mkdirs()) throw IllegalStateException("Failed to create ${UniCore.getName()} data directory.") }
+        ).apply(fileChecks)
+    companion object {
+        private val fileChecks: File.() -> Unit = {
+            if (!exists() && !mkdirs())
+                throw IllegalStateException("Failed to create a ${UniCore.getName()} directory.")
+        }
+    }
 }

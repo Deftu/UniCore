@@ -11,6 +11,7 @@ import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
 import xyz.unifycraft.unicore.api.gui.notifications.Notifications
 import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
+import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
 import xyz.unifycraft.unicore.api.utils.*
 import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
@@ -37,6 +38,7 @@ interface UniCore {
     fun deleter(): Deleter
     fun updater(): Updater
     fun mojangHelper(): MojangHelper
+    fun translationRegistry(): TranslationRegistry
     fun hypixelHelper(): HypixelHelper
     fun internetHelper(): InternetHelper
     fun colorHelper(): ColorHelper
@@ -86,6 +88,7 @@ interface UniCore {
         @JvmStatic fun getDeleter() = instance.deleter()
         @JvmStatic fun getUpdater() = instance.updater()
         @JvmStatic fun getMojangHelper() = instance.mojangHelper()
+        @JvmStatic fun getTranslationRegistry() = instance.translationRegistry()
         @JvmStatic fun getHypixelHelper() = instance.hypixelHelper()
         @JvmStatic fun getInternetHelper() = instance.internetHelper()
         @JvmStatic fun getColorHelper() = instance.colorHelper()

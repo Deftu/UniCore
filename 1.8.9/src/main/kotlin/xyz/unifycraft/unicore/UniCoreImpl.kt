@@ -26,9 +26,11 @@ import xyz.unifycraft.unicore.api.utils.*
 import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
+import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
 import xyz.unifycraft.unicore.api.utils.updater.Updater
 import xyz.unifycraft.unicore.cloud.CloudConnection
 import xyz.unifycraft.unicore.quicksocket.JsonParser
+import xyz.unifycraft.unicore.utils.language.TranslationRegistryImpl
 import xyz.unifycraft.unicore.utils.updater.UpdaterEventListener
 import java.util.UUID
 
@@ -56,6 +58,7 @@ import java.util.UUID
     private lateinit var deleter: Deleter
     private lateinit var updater: Updater
     private lateinit var mojangHelper: MojangHelper
+    private lateinit var translationRegistry: TranslationRegistry
     private lateinit var hypixelHelper: HypixelHelper
     private lateinit var internetHelper: InternetHelper
     private lateinit var colorHelper: ColorHelper
@@ -84,6 +87,7 @@ import java.util.UUID
         deleter = Deleter(fileHelper.dataDir).also { it.initialize() }
         updater = Updater()
         mojangHelper = MojangHelper()
+        translationRegistry = TranslationRegistryImpl()
         hypixelHelper = HypixelHelperImpl()
         internetHelper = InternetHelper()
         colorHelper = ColorHelper()
@@ -118,6 +122,7 @@ import java.util.UUID
     override fun deleter() = deleter
     override fun updater() = updater
     override fun mojangHelper() = mojangHelper
+    override fun translationRegistry() = translationRegistry
     override fun hypixelHelper() = hypixelHelper
     override fun internetHelper() = internetHelper
     override fun colorHelper() = colorHelper
