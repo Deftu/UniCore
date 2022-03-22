@@ -27,9 +27,8 @@ apply plugin: "net.kyori.blossom"
 apply plugin: "maven-publish"
 apply plugin: "java"
 
-archivesBaseName = projectName
+archivesBaseName = "$project-1.8.9-forge"
 version = projectVersion
-apply plugin: "xyz.unifycraft.unibuild"
 
 apply plugin: "xyz.unifycraft.unisigning"
 
@@ -51,11 +50,6 @@ loom {
         mixinConfig("mixins.${projectId}.json")
         mixin.defaultRefmapName.set("mixins.${projectId}.refmap.json")
     }
-}
-
-unibuild {
-    mcVersion = "1.8.9"
-    mcPlatform = "forge"
 }
 
 blossom {
