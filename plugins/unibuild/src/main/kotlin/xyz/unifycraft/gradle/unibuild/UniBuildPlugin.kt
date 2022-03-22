@@ -14,9 +14,7 @@ class UniBuildPlugin : Plugin<Project> {
         val version = project.version as String
 
         val gitBranch = fetchGitBranch(project, extension.gitBranchName.get())
-        cachedGitBranch = gitBranch
         val gitHash = fetchGitHash(project, extension.gitHashName.get())
-        cachedGitHash = gitHash
 
         project.tasks.register("applyBuildInfo") {
             it.group = "unibuild"
@@ -55,31 +53,26 @@ class UniBuildPlugin : Plugin<Project> {
             "master"
         )
 
-        private var cachedGitBranch: String? = null
-        private var cachedGitHash: String? = null
-
         fun fetchGitBranch(project: Project, name: String): String {
             return try {
                 var branch = System.getenv(name)
-                if (cachedGitBranch != null) return cachedGitBranch!!
                 if (branch == null) branch = CommandLineHelper.fetchCommandOutput(project, "git", "rev-parse", "--abbrev-ref", "HEAD")
                 if (branch != null && !branch.isEmpty() && !branchExclusions.contains(branch)) String.format(
                     "-%s",
                     branch
                 ) else ""
             } catch (e: Exception) {
-                if (cachedGitBranch == null) "" else cachedGitBranch!!
+                ""
             }
         }
 
         fun fetchGitHash(project: Project, name: String): String {
             return try {
                 var hash = System.getenv(name)
-                if (cachedGitHash != null) return cachedGitHash!!
                 if (hash == null) hash = CommandLineHelper.fetchCommandOutput(project, "git", "log", "-n", "1", "--pretty=tformat:%h")
                 if (hash != null && !hash.isEmpty()) hash else "LOCAL"
             } catch (e: Exception) {
-                if (cachedGitHash == null) "LOCAL" else cachedGitHash!!
+                ""
             }
         }
     }
