@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.cloud.packets
 
-import com.google.gson.JsonObject
+/*import com.google.gson.JsonObject
 import xyz.deftu.deftils.Multithreading
 import xyz.deftu.quicksocket.common.packets.PacketBase
 import xyz.unifycraft.unicore.UniCoreImpl
@@ -18,4 +18,4 @@ class PacketKeepAlive : PacketBase("KEEP_ALIVE") {
     override fun onPacketSent(data: JsonObject) {
         // We won't use this for this packet!
     }
-}
+}*/

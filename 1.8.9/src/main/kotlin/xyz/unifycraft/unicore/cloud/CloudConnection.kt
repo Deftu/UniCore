@@ -1,6 +1,6 @@
 package xyz.unifycraft.unicore.cloud
 
-import com.google.gson.JsonObject
+/*import com.google.gson.JsonObject
 import kotlinx.coroutines.runBlocking
 import org.apache.logging.log4j.LogManager
 import org.java_websocket.handshake.ServerHandshake
@@ -51,4 +51,4 @@ class CloudConnection(
         const val acceptedSessionIdName = "accepted_session_id"
         const val sessionIdName = "session_id"
     }
-}
+}*/

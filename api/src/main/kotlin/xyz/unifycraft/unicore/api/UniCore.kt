@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.kodein.di.*
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
@@ -22,7 +23,6 @@ interface UniCore {
     fun initialize(event: InitializationEvent)
     fun withInstance(instance: UniCore)
 
-    fun logger(): Logger
     fun gson(): Gson
     fun eventBus(): EventBus
 
@@ -72,7 +72,7 @@ interface UniCore {
         }
         @JvmStatic fun getChatPrefix() = chatPrefix
 
-        @JvmStatic fun getLogger() = instance.logger()
+        @JvmStatic fun getLogger() = LogManager.getLogger(getName())
         @JvmStatic fun getGson() = instance.gson()
         @JvmStatic fun getEventBus() = instance.eventBus()
 

@@ -1,11 +1,9 @@
 {
-    "version": "1.0.0",
-    "stage_one_version": "1.0.0",
-    "stage_two_version": "1.0.0",
+    "version": "1.0.0.208f6e6",
+    "loader_version": "1.0.0",
 
     "url": "https://raw.githubusercontent.com/UnifyCraft/UniCore/main/data/v1/downloads/1.8.9/UniCore-{gameversion}-{platform}-{version}.jar",
-    "stage_one_url": "https://raw.githubusercontent.com/UnifyCraft/UniCore/main/data/v1/downloads/1.8.9/UniCore-Loader-Stage1-{gameversion}-{platform}-{version}.jar",
-    "stage_two_url": "https://raw.githubusercontent.com/UnifyCraft/UniCore/main/data/v1/downloads/1.8.9/UniCore-Loader-Stage2-{gameversion}-{platform}-{version}.jar",
+    "loader_url": "https://raw.githubusercontent.com/UnifyCraft/UniCore/main/data/v1/downloads/1.8.9/UniCore-Loader-{gameversion}-{platform}-{version}.jar",
 
     "mixins": "mixins.unicore.json",
     "initializer": {
