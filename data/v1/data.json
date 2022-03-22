@@ -1,11 +1,10 @@
 {
-    "version": "1.0.0.208f6e6",
+    "version": "1.0.0",
     "loader_version": "1.0.0",
 
     "url": "https://raw.githubusercontent.com/UnifyCraft/UniCore/main/data/v1/downloads/1.8.9/UniCore-{gameversion}-{platform}-{version}.jar",
     "loader_url": "https://raw.githubusercontent.com/UnifyCraft/UniCore/main/data/v1/downloads/1.8.9/UniCore-Loader-{gameversion}-{platform}-{version}.jar",
 
-    "mixins": "mixins.unicore.json",
     "initializer": {
         "class": "xyz.unifycraft.unicore.api.mixins.UniCoreInitializer",
         "method": "initialize"
