@@ -69,7 +69,7 @@ dependencies {
 
     compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
 
-    shade(project(":api:1.8.9"))
+    shade(project(path: ":api:1.8.9", configuration: "default"))
 }
 
 processResources {
