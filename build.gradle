@@ -43,6 +43,28 @@ allprojects {
                 relocate("org.kodein", "${base}.kodein")
                 relocate("okhttp3", "${base}.okhttp")
                 relocate("okio", "${base}.okio")
+
+                exclude("LICENSE.md")
+                exclude("pack.mcmeta")
+                exclude("dummyThing")
+                exclude("**/module-info.class")
+                exclude("*.so")
+                exclude("*.dylib")
+                exclude("*.dll")
+                exclude("*.jnilib")
+                exclude("ibxm/**")
+                exclude("com/jcraft/**")
+                exclude("org/lwjgl/**")
+                exclude("net/java/**")
+
+                exclude("META-INF/proguard/**")
+                exclude("META-INF/maven/**")
+                exclude("META-INF/versions/**")
+                exclude("META-INF/com.android.tools/**")
+
+                exclude("**/*.kotlin_metadata")
+                exclude("**/*.kotlin_module")
+                exclude("**/*.kotlin_builtins")
             }
         }
     }
