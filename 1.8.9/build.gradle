@@ -27,7 +27,7 @@ apply plugin: "net.kyori.blossom"
 apply plugin: "maven-publish"
 apply plugin: "java"
 
-archivesBaseName = "$project-1.8.9-forge"
+archivesBaseName = "$projectName-1.8.9-forge"
 version = projectVersion
 
 apply plugin: "xyz.unifycraft.unisigning"
