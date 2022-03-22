@@ -1,24 +1,18 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "6.1.0"
-    id "org.jetbrains.kotlin.jvm" version "1.6.10"
-    id "net.kyori.blossom" version "1.3.0"
-    id "java"
+    id("com.github.johnrengelman.shadow") version("7.1.2")
+    id("org.jetbrains.kotlin.jvm") version("1.6.10")
+    id("net.kyori.blossom") version("1.3.0")
+    id("java")
 }
-
-sourceCompatibility = targetCompatibility = 1.8
-compileJava.options.encoding = "UTF-8"
 
 allprojects {
     apply plugin: "com.github.johnrengelman.shadow"
 
-    ext {
-        defaultShadow = true
-    }
-    
-    configurations {
-        shade
-        implementation.extendsFrom(shade)
-    }
+    group = projectGroup
+    version = projectVersion
+
+    sourceCompatibility = targetCompatibility = 1.8
+    compileJava.options.encoding = "UTF-8"
 
     repositories {
         maven { url("https://s01.oss.sonatype.org/content/repositories/releases/") }
@@ -29,14 +23,27 @@ allprojects {
         maven { url("https://repo.sk1er.club/repository/maven-public/") }
         maven { url("https://repo.spongepowered.org/maven/") }
     }
-    
-    shadowJar {
-        configurations = [project.configurations.shade]
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        archiveClassifier.set("")
-    }
-    
-    if (defaultShadow) {
-        jar.finalizedBy(shadowJar)
+
+    afterEvaluate {
+        if (plugins.hasPlugin("xyz.unifycraft.unishadow")) {
+            unishadowJar {
+                def base = "${project.rootProject.ext.projectGroup}.api.lib"
+                relocate("com.electronwill.nightconfig", "${base}.nightconfig")
+                relocate("com.github.benmanes.caffeine", "${base}.caffeine")
+                relocate("gg.essential.universal", "${base}.universalcraft")
+                relocate("xyz.deftu.quicksocket", "${base}.quicksocket")
+                relocate("org.apache.commons", "${base}.apache.commons")
+                relocate("com.google.common", "${base}.google.common")
+                relocate("me.kbrewster.eventbus", "${base}.keventbus")
+                relocate("xyz.unifycraft.confide", "${base}.confide")
+                relocate("gg.essential.elementa", "${base}.elementa")
+                relocate("org.java_websocket", "${base}.websocket")
+                relocate("xyz.deftu.deftils", "${base}.deftils")
+                relocate("com.google.gson", "${base}.gson")
+                relocate("org.kodein", "${base}.kodein")
+                relocate("okhttp3", "${base}.okhttp")
+                relocate("okio", "${base}.okio")
+            }
+        }
     }
 }

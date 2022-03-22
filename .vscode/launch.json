@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Minecraft Client (:api:1.8.9)",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/api\\versions\\1.8.9/run",
+      "console": "internalConsole",
+      "stopOnEntry": false,
+      "mainClass": "net.fabricmc.devlaunchinjector.Main",
+      "vmArgs": "\"-Dfabric.dli.config\u003dC:\\Deftu\\Projects\\UnifyCraft\\UniCore\\api\\versions\\1.8.9\\.gradle\\loom-cache\\launch.cfg\" \"-Dfabric.dli.env\u003dclient\" \"-Dfabric.dli.main\u003dnet.minecraft.launchwrapper.Launch\"",
+      "args": "",
+      "env": {},
+      "projectName": "api:1.8.9"
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Client (:1.8.9)",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/1.8.9/run",
+      "console": "internalConsole",
+      "stopOnEntry": false,
+      "mainClass": "net.fabricmc.devlaunchinjector.Main",
+      "vmArgs": "\"-Dfabric.dli.config\u003dC:\\Deftu\\Projects\\UnifyCraft\\UniCore\\1.8.9\\.gradle\\loom-cache\\launch.cfg\" \"-Dfabric.dli.env\u003dclient\" \"-Dfabric.dli.main\u003dnet.minecraft.launchwrapper.Launch\"",
+      "args": "",
+      "env": {},
+      "projectName": "1.8.9"
+    }
+  ]
+}

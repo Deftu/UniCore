@@ -1,0 +1,24 @@
+plugins {
+    id("org.jetbrains.kotlin.jvm") version("1.6.10")
+    id("java-gradle-plugin")
+    id("idea")
+}
+
+group = "xyz.unifycraft.gradle.unibuild"
+version = "1.0.0"
+
+sourceCompatibility = targetCompatibility = 1.8
+compileJava.options.encoding = "UTF-8"
+
+gradlePlugin {
+    plugins {
+        create("unibuild") {
+            id = "xyz.unifycraft.unibuild"
+            implementationClass = "xyz.unifycraft.gradle.unibuild.UniBuildPlugin"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}

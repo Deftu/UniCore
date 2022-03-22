@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.minecraft.client.Minecraft
-import net.minecraft.client.resources.I18n
 import xyz.unifycraft.unicore.api.UniCore
 import xyz.unifycraft.unicore.api.utils.language.Language
 import xyz.unifycraft.unicore.api.utils.language.LanguageFetcher
@@ -45,8 +44,12 @@ class TranslationRegistryImpl : TranslationRegistry {
                     file.writeText(UniCore.getGson().toJson(json), StandardCharsets.UTF_8)
                 }
             }
-
-            I18n.format()
         }
     }
+
+    override fun translate(id: String, key: String, vararg params: Any) = cachedLanguages[id]?.first {
+        it.code == Minecraft.getMinecraft().languageManager.currentLanguage.languageCode
+    }?.items?.first {
+        it.first == key
+    }?.second
 }

@@ -1,12 +1,23 @@
 pluginManagement {
+    file("plugins").listFiles().filter {
+        it != null && it.isDirectory
+    }.forEach {
+        includeBuild(it)
+    }
+
     repositories {
-        maven("https://repo.woverflow.cc/")
+        gradlePluginPortal()
+        mavenCentral()
+        mavenLocal()
+        maven("https://jitpack.io/")
+        maven("https://maven.architectury.dev/")
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.minecraftforge.net/")
     }
     
     resolutionStrategy {
         eachPlugin {
             when(requested.id.id) {
-                "org.spongepowered.mixin" -> useModule("com.github.Skytils:MixinGradle:${requested.version}")
                 "com.replaymod.preprocess" -> useModule("com.github.replaymod:preprocessor:${requested.version}")
                 "com.replaymod.preprocess-root" -> useModule("com.github.replaymod:preprocessor:${requested.version}")
             }

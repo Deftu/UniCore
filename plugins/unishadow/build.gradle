@@ -1,0 +1,34 @@
+plugins {
+    id("org.jetbrains.kotlin.jvm") version("1.6.10")
+    id("java-gradle-plugin")
+}
+
+group = "xyz.unifycraft.gradle.unishadow"
+version = "1.0.0"
+
+sourceCompatibility = targetCompatibility = 1.8
+compileJava.options.encoding = "UTF-8"
+
+gradlePlugin {
+    plugins {
+        create("unishadow") {
+            id = "xyz.unifycraft.unishadow"
+            implementationClass = "xyz.unifycraft.gradle.unishadow.UniShadowPlugin"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+
+    maven { url("https://jitpack.io/") }
+    maven { url("https://maven.fabricmc.net") }
+    maven { url("https://maven.architectury.dev/") }
+    maven { url("https://repo.sk1er.club/repository/maven-public/") }
+}
+
+dependencies {
+    compileOnly("gg.essential:architectury-loom:0.10.0.2")
+    implementation("com.github.johnrengelman.shadow:com.github.johnrengelman.shadow.gradle.plugin:7.1.2")
+}

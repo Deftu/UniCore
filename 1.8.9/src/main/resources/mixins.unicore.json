@@ -7,9 +7,11 @@
     "target": "@env(CLIENT)",
     "refmap": "mixins.${id}.refmap.json",
     "mixins": [
-      "client.MinecraftMixin",
+        "client.MinecraftMixin",
 
-      "gui.GuiChatMixin",
-      "gui.GuiScreenMixin"
+        "gui.GuiChatMixin",
+        "gui.GuiScreenMixin",
+
+        "utils.I18nMixin"
     ]
 }

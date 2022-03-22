@@ -7,7 +7,6 @@ import xyz.unifycraft.unicore.utils.FileHelperImpl
 import xyz.unifycraft.unicore.utils.http.HttpRequesterImpl
 import xyz.unifycraft.unicore.utils.hypixel.HypixelHelperImpl
 import com.google.gson.GsonBuilder
-import gg.essential.universal.wrappers.UPlayer
 import me.kbrewster.eventbus.*
 import net.minecraft.client.Minecraft
 import net.minecraftforge.common.MinecraftForge

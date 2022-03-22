@@ -2,7 +2,6 @@ buildscript {
     def mcVersionStr = project.name.tokenize("-")[0]
     def (major, minor, patch) = mcVersionStr.tokenize(".")
     def base = major == null || minor == null
-    if (base) mcVersionStr = "1.18"
     def mcVersion = base ? 11800 : "${major}${minor.padLeft(2, "0")}${(patch ?: "").padLeft(2, "0")}" as int
     def fabric = mcVersion >= 11400
     project.ext.mcVersion = mcVersion
@@ -12,125 +11,81 @@ buildscript {
     project.ext.forge = !fabric
 
     repositories {
-        maven { url("https://maven.fabricmc.net/") }
-        maven { url("https://maven.minecraftforge.net/") }
+        gradlePluginPortal()
         maven { url("https://jitpack.io/") }
+        maven { url("https://maven.architectury.dev/") }
+        maven { url("https://maven.fabricmc.net") }
+        maven { url("https://maven.minecraftforge.net") }
+        maven { url("https://repo.sk1er.club/repository/maven-public/") }
     }
 
     dependencies {
-        if (fabric) {
-            classpath("net.fabricmc:fabric-loom:0.10-SNAPSHOT")
-        } else {
-            def forgeGradleVersion = mcVersion >= 11200 ? "717a9f4" :
-                    mcVersion >= 10904 ? "83163c1" :
-                            "4be84bf"
-            classpath("com.github.ReplayMod:ForgeGradle:$forgeGradleVersion:all") {
-                exclude group: "net.sf.trove4j", module: "trove4j"
-                exclude group: "trove", module: "trove"
-            }
-        }
+        classpath("gg.essential:architectury-loom:0.10.0.2")
+        if (!fabric) classpath("dev.architectury.architectury-pack200:dev.architectury.architectury-pack200.gradle.plugin:0.1.3")
+        classpath("com.github.replaymod:preprocessor:7746c47")
+        classpath("xyz.unifycraft.gradle.unisigning:unisigning:1.0.0")
+        classpath("xyz.unifycraft.gradle.unishadow:unishadow:1.0.0")
+        classpath("xyz.unifycraft.gradle.unibuild:unibuild:1.0.0")
     }
 }
 
-def FG3 = !fabric && mcVersion >= 11400
-def FG2 = !fabric && mcVersion < 11400
 def FABRIC = fabric
+def FORGE = !FABRIC
 
-if (FABRIC) apply plugin: "fabric-loom"
-else apply plugin: "net.minecraftforge.gradle.forge"
+if (FORGE) {
+    apply plugin: "dev.architectury.architectury-pack200"
+    ext.set("loom.platform", "forge")
+}
+apply plugin: "gg.essential.loom"
 
-apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: "org.jetbrains.kotlin.jvm"
 apply plugin: "com.replaymod.preprocess"
+apply plugin: "xyz.unifycraft.unishadow"
 apply plugin: "net.kyori.blossom"
 apply plugin: "maven-publish"
 apply plugin: "java"
+apply plugin: "idea"
 
-archivesBaseName = "$projectName-$mcVersionStr-$mcPlatform"
+archivesBaseName = projectName
 version = projectVersion
+apply plugin: "xyz.unifycraft.unibuild"
+
+apply plugin: "xyz.unifycraft.unisigning"
 
 compileKotlin.kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 
-if (FABRIC) {
-    loom {
-        runConfigs.all {
-            ideConfigGenerated = true
-        }
-    }
-} else {
-    minecraft {
-        if (FG3) {
-            runs {
-                client {
-                    workingDirectory rootProject.file("run")
-                    property "forge.logging.console.level", "info"
-                    mods {
-                        examplemod {
-                            source sourceSets.main
-                        }
-                    }
-                }
-            }
-        } else {
-            runDir = "run"
-        }
-
-        if (!FG3) {
-            version = [
-                    11202: "1.12.2-14.23.0.2486",
-                    11201: "1.12.1-14.22.0.2444",
-                    11200: "1.12-14.21.1.2387",
-                    11102: "1.11.2-13.20.0.2216",
-                    11100: "1.11-13.19.1.2188",
-                    11002: "1.10.2-12.18.2.2099",
-                    10904: "1.9.4-12.17.0.1976",
-                    10809: "1.8.9-11.15.1.2318-1.8.9",
-                    10800: "1.8-11.14.4.1563",
-                    10710: "1.7.10-10.13.4.1558-1.7.10",
-            ][mcVersion]
-            mappings = [
-                    11404: "snapshot_20190719-1.14.3",
-                    11202: "snapshot_20170615",
-                    11201: "snapshot_20170615",
-                    11200: "snapshot_20170615",
-                    11102: "snapshot_20161220",
-                    11100: "snapshot_20161111",
-                    11002: "snapshot_20160518",
-                    10904: "snapshot_20160518",
-                    10809: "stable_22",
-                    10800: "snapshot_nodoc_20141130",
-                    10710: "stable_12",
-            ][mcVersion]
-        } else if (mcVersion < 11700) {
-            mappings channel: "snapshot", version: [
-                    11502: "20200220-1.15.1",
-                    11602: "20201028-1.16.3",
-            ][mcVersion]
-        } else {
-            mappings channel: "official", version: mcVersionStr
+loom {
+    if (FORGE) {
+        forge {
+            pack200Provider = new dev.architectury.pack200.java.Pack200Adapter()
         }
     }
 }
 
-if (FABRIC) {
-    configurations {
-        modImplementation.extendsFrom(shade)
-    }
+unibuild {
+    mcVersion = project.ext.mcVersionStr
+    mcPlatform = project.ext.mcPlatform
 }
 
 blossom {
-    replaceToken("__VERSION__", projectVersion)
+    replaceToken("__VERSION__", project.version)
+}
+
+configurations {
+    modShade
+    modImplementation.extendsFrom(modShade)
 }
 
 dependencies {
-    if (FABRIC) {
-        minecraft("com.mojang:minecraft:" + [
-                11800: "1.18"
-        ][mcVersion])
-        mappings("net.fabricmc:yarn:" + [
-                11800: "1.18+build.1:v2"
-        ][mcVersion])
-    }
+    minecraft("com.mojang:minecraft:" + [
+            11802: "1.18.2",
+            10809: "1.8.9"
+    ][mcVersion])
+    mappings([
+            11802: "1.18.2+build.1",
+            10809: "de.oceanlabs.mcp:mcp_stable:22-1.8.9"
+    ][mcVersion])
+    if (FORGE) forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
 
     shade("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
     shade("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -167,13 +122,13 @@ dependencies {
 processResources {
     inputs.property("name", projectName)
     inputs.property("id", projectId)
-    inputs.property("version", projectVersion)
+    inputs.property("version", project.version)
 
     filesMatching("fabric.mod.json") {
         expand(
                 "name": projectName,
                 "id": projectId,
-                "version": projectVersion
+                "version": project.version
         )
     }
 
@@ -181,7 +136,7 @@ processResources {
         expand(
                 "id": projectId,
                 "name": projectName,
-                "version": version,
+                "version": project.version,
                 "mcversion": minecraft.version
         )
     }
@@ -191,24 +146,26 @@ processResources {
 
 java {
     withJavadocJar()
-    withSourcesJar()
 }
 
-artifacts {
-    archives(shadowJar, javadocJar, sourcesJar)
-}
+afterEvaluate {
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = archivesBaseName
+                group = projectGroup
+                version = project.version
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = archivesBaseName
-            group = projectGroup
-            version = projectVersion
-
-            from components.java
+                artifact(unishadowJar) {
+                    builtBy(unishadowJar)
+                }
+                artifact(javadocJar) {
+                    builtBy(javadocJar)
+                }
+            }
         }
     }
 }
 
-apply from: "${rootProject.projectDir}/gradle/common/shadowrelocation.gradle"
 classes.dependsOn(processResources)
+unishadowJar.dependsOn(applyBuildInfo)

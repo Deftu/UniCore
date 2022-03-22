@@ -12,5 +12,7 @@ interface TranslationRegistry {
     //fun retrieveCrowdin(id: String, name: String = id) = retrieve(id, name, CrowdinLanguageFetcher())
     fun retrieveJson(id: String, url: String) = retrieve(id, url, JsonLanguageFetcher())
     fun retrieveUrl(id: String, baseUrl: String) = retrieve(id, baseUrl, UrlLanguageFetcher())
+
+    fun translate(id: String, path: String, vararg params: Any): String?
 }
 

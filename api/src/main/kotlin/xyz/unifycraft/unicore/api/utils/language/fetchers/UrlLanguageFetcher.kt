@@ -22,7 +22,8 @@ class UrlLanguageFetcher : LanguageFetcher {
                 val json = QuickSocketJsonHandler.parser.parse(str)
                 if (!json.isJsonObject) return@let null
                 val jsonObject = json.asJsonObject
-                Language(path.substringAfterLast("/"), serializeToPairs(jsonObject))
+                //Language(path.substringAfterLast("/"), serializeToPairs(jsonObject))
+                null
             }
         }
     }

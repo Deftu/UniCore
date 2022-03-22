@@ -25,10 +25,11 @@ class JsonLanguageFetcher : LanguageFetcher {
                 val languages = jsonObject.entrySet().map { entry ->
                     if (entry.value !is JsonObject) throw IllegalArgumentException("Expected JsonObject, received ${entry.value::class.java.simpleName}.")
                     val innerObject = entry.value.asJsonObject
-                    Language(entry.key, innerObject.entrySet().map { innerEntry ->
+                    /*Language(entry.key, innerObject.entrySet().map { innerEntry ->
                         if (entry.value !is JsonPrimitive) throw IllegalArgumentException("Expected JsonPrimitive, received ${entry.value::class.java.simpleName}.")
                         innerEntry.key to innerEntry.value.asJsonPrimitive.asString
-                    })
+                    })*/
+                    null
                 }
                 languages
             } ?: emptyList()
