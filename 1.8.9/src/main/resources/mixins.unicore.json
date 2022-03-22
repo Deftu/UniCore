@@ -10,8 +10,6 @@
         "client.MinecraftMixin",
 
         "gui.GuiChatMixin",
-        "gui.GuiScreenMixin",
-
-        "utils.I18nMixin"
+        "gui.GuiScreenMixin"
     ]
 }

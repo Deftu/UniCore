@@ -13,7 +13,8 @@ import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
 import java.io.File
 import java.nio.charset.StandardCharsets
 
-class TranslationRegistryImpl : TranslationRegistry {
+// TODO
+/*class TranslationRegistryImpl : TranslationRegistry {
     override val translationsDir = File(UniCore.getFileHelper().dataDir, "Translations")
     override val cachedLanguages = mutableMapOf<String, MutableList<Language>>()
 
@@ -52,4 +53,4 @@ class TranslationRegistryImpl : TranslationRegistry {
     }?.items?.first {
         it.first == key
     }?.second
-}
+}*/

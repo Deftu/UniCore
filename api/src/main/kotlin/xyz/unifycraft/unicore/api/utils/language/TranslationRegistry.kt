@@ -4,7 +4,8 @@ import xyz.unifycraft.unicore.api.utils.language.fetchers.JsonLanguageFetcher
 import xyz.unifycraft.unicore.api.utils.language.fetchers.UrlLanguageFetcher
 import java.io.File
 
-interface TranslationRegistry {
+// TODO
+/*interface TranslationRegistry {
     val translationsDir: File
     val cachedLanguages: Map<String, List<Language>>
     fun retrieve(id: String, path: String, fetcher: LanguageFetcher)
@@ -14,5 +15,4 @@ interface TranslationRegistry {
     fun retrieveUrl(id: String, baseUrl: String) = retrieve(id, baseUrl, UrlLanguageFetcher())
 
     fun translate(id: String, path: String, vararg params: Any): String?
-}
-
+}*/

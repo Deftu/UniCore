@@ -25,11 +25,11 @@ import xyz.unifycraft.unicore.api.utils.*
 import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
-import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
+//import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
 import xyz.unifycraft.unicore.api.utils.updater.Updater
 import xyz.unifycraft.unicore.cloud.CloudConnection
 import xyz.unifycraft.unicore.quicksocket.JsonParser
-import xyz.unifycraft.unicore.utils.language.TranslationRegistryImpl
+//import xyz.unifycraft.unicore.utils.language.TranslationRegistryImpl
 import xyz.unifycraft.unicore.utils.updater.UpdaterEventListener
 import java.util.UUID
 
@@ -57,12 +57,12 @@ import java.util.UUID
     private lateinit var deleter: Deleter
     private lateinit var updater: Updater
     private lateinit var mojangHelper: MojangHelper
-    private lateinit var translationRegistry: TranslationRegistry
+    //private lateinit var translationRegistry: TranslationRegistry
     private lateinit var hypixelHelper: HypixelHelper
     private lateinit var internetHelper: InternetHelper
     private lateinit var colorHelper: ColorHelper
 
-    private lateinit var cloudConnection: CloudConnection
+    //private lateinit var cloudConnection: CloudConnection
 
     override fun initialize(event: InitializationEvent) {
         val progressBar = ProgressManager.push(UniCore.getName(), 3)
@@ -86,19 +86,19 @@ import java.util.UUID
         deleter = Deleter(fileHelper.dataDir).also { it.initialize() }
         updater = Updater()
         mojangHelper = MojangHelper()
-        translationRegistry = TranslationRegistryImpl()
+        //translationRegistry = TranslationRegistryImpl()
         hypixelHelper = HypixelHelperImpl()
         internetHelper = InternetHelper()
         colorHelper = ColorHelper()
 
         progressBar.step("Connecting to the UniCore Cloud")
         QuickSocketJsonHandler.applyJsonParser(JsonParser())
-        cloudConnection = CloudConnection(
+        /*cloudConnection = CloudConnection(
             sessionId = UUID.randomUUID(),
             headers = arrayOf("uuid" to Minecraft.getMinecraft().session.profile.id.toString())
         ).apply {
             connectBlocking()
-        }
+        }*/
     }
 
     override fun withInstance(instance: UniCore) {
@@ -121,12 +121,12 @@ import java.util.UUID
     override fun deleter() = deleter
     override fun updater() = updater
     override fun mojangHelper() = mojangHelper
-    override fun translationRegistry() = translationRegistry
+    //override fun translationRegistry() = translationRegistry
     override fun hypixelHelper() = hypixelHelper
     override fun internetHelper() = internetHelper
     override fun colorHelper() = colorHelper
 
-    fun cloudConnection() = cloudConnection
+    //fun cloudConnection() = cloudConnection
 
     companion object {
         lateinit var instance: UniCoreImpl
