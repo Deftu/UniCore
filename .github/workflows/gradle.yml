@@ -14,13 +14,8 @@ on:
       - 'LICENSE'
       - '.gitignore'
   workflow_dispatch:
-  release:
-    types:
-      - "published"
 
 concurrency:
-  # Maximum of one running workflow per pull request source branch
-  # or branch and run number combination (cancels old run if action is rerun)
   group: ${{ github.head_ref || format('{0}-{1}', github.ref, github.run_number) }}
   cancel-in-progress: true
 
@@ -44,8 +39,8 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-v4-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-v1-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-v4
       - run: chmod +x ./gradlew
-      - run: ./gradlew --no-daemon setupCiWorkspace build
+      - run: ./gradlew --no-daemon build
