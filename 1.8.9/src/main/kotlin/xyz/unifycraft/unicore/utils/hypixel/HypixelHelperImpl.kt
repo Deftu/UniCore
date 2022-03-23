@@ -5,6 +5,7 @@ import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import okhttp3.Request
+import net.hypixel.api.HypixelAPI
 import xyz.deftu.deftils.Multithreading
 import xyz.deftu.quicksocket.common.utils.QuickSocketJsonHandler
 import xyz.unifycraft.unicore.api.UniCore
@@ -12,11 +13,13 @@ import xyz.unifycraft.unicore.api.events.HypixelApiKeyEvent
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelGameType
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.*
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 class HypixelHelperImpl : HypixelHelper {
-    override var apiKey: String = ""
+    private var apiKey: String = ""
+    override lateinit var hypixelApi: HypixelAPI
     override val locrawHelper = HypixelLocrawHelperImpl(this)
 
     init {
@@ -66,7 +69,7 @@ class HypixelHelperImpl : HypixelHelper {
                         if (!success.isJsonPrimitive) failure.invoke("Hypixel provided an invalid JSON response, API key status is invalid.").also { return@use }
                         if (!success.asJsonPrimitive.asBoolean) failure.invoke("Hypixel provided an invalid JSON response, API key status is not a boolean.").also { return@use }
                         this.apiKey = apiKey
-                        UniCore.getEventBus().post(HypixelApiKeyEvent(apiKey))
+                        this.hypixelApi = HypixelAPI(UUID.fromString(apiKey))
                         UniCore.getNotifications().post(UniCore.getName(), "Successfully set up your Hypixel API key.")
                     }
                 }

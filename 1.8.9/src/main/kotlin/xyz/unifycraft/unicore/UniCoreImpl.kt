@@ -1,18 +1,13 @@
 package xyz.unifycraft.unicore
 
-import xyz.unifycraft.unicore.commands.CommandRegistryImpl
-import xyz.unifycraft.unicore.commands.UniCoreCommand
-import xyz.unifycraft.unicore.keybinds.KeyBindRegistryImpl
-import xyz.unifycraft.unicore.utils.FileHelperImpl
-import xyz.unifycraft.unicore.utils.http.HttpRequesterImpl
-import xyz.unifycraft.unicore.utils.hypixel.HypixelHelperImpl
+//import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
+//import xyz.unifycraft.unicore.cloud.CloudConnection
+//import xyz.unifycraft.unicore.utils.language.TranslationRegistryImpl
 import com.google.gson.GsonBuilder
 import me.kbrewster.eventbus.*
-import net.minecraft.client.Minecraft
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.ProgressManager
-import org.apache.logging.log4j.LogManager
 import xyz.deftu.quicksocket.common.utils.QuickSocketJsonHandler
 import xyz.unifycraft.unicore.api.UniCore
 import xyz.unifycraft.unicore.api.UniCoreConfig
@@ -25,13 +20,15 @@ import xyz.unifycraft.unicore.api.utils.*
 import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
-//import xyz.unifycraft.unicore.api.utils.language.TranslationRegistry
 import xyz.unifycraft.unicore.api.utils.updater.Updater
-//import xyz.unifycraft.unicore.cloud.CloudConnection
+import xyz.unifycraft.unicore.commands.CommandRegistryImpl
+import xyz.unifycraft.unicore.commands.UniCoreCommand
+import xyz.unifycraft.unicore.keybinds.KeyBindRegistryImpl
 import xyz.unifycraft.unicore.quicksocket.JsonParser
-//import xyz.unifycraft.unicore.utils.language.TranslationRegistryImpl
+import xyz.unifycraft.unicore.utils.FileHelperImpl
+import xyz.unifycraft.unicore.utils.http.HttpRequesterImpl
+import xyz.unifycraft.unicore.utils.hypixel.HypixelHelperImpl
 import xyz.unifycraft.unicore.utils.updater.UpdaterEventListener
-import java.util.UUID
 
 @Mod(
     name = "UniCore",

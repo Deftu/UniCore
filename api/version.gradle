@@ -12,6 +12,7 @@ buildscript {
 
     repositories {
         gradlePluginPortal()
+        mavenLocal()
         maven { url("https://jitpack.io/") }
         maven { url("https://maven.architectury.dev/") }
         maven { url("https://maven.fabricmc.net") }
@@ -48,7 +49,8 @@ apply plugin: "idea"
 
 archivesBaseName = projectName
 version = projectVersion
-apply plugin: "xyz.unifycraft.unibuild"
+group = "${projectGroup}.api"
+apply plugin: "xyz.unifycraft.gradle.unibuild"
 
 apply plugin: "xyz.unifycraft.unisigning"
 
@@ -77,6 +79,7 @@ configurations {
 }
 
 dependencies {
+    // Minecraft, Forge and Mixin.
     minecraft("com.mojang:minecraft:" + [
             11802: "1.18.2",
             10809: "1.8.9"
@@ -86,37 +89,43 @@ dependencies {
             10809: "de.oceanlabs.mcp:mcp_stable:22-1.8.9"
     ][mcVersion])
     if (FORGE) forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+    shade("org.spongepowered:mixin:" + [
+            11802: "0.8.5-SNAPSHOT",
+            11202: "0.7.11-SNAPSHOT",
+            10809: "0.7.11-SNAPSHOT"
+    ][mcVersion])
 
+    // Kotlin language.
     shade("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
     shade("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    // Internal libraries, also server as convenience for other mods.
     shade("org.kodein.di:kodein-di:7.10.0")
-
     shade(api("com.github.KevinPriv:keventbus:master-SNAPSHOT"))
     shade("xyz.deftu.deftils:Deftils:1.2.2")
     shade("com.github.ben-manes.caffeine:caffeine:2.9.3")
     shade(api("org.java-websocket:Java-WebSocket:1.5.2"))
     shade(api("xyz.deftu.quicksocket:QuickSocket:1.2.2"))
     shade(api("com.squareup.okhttp3:okhttp:4.9.3"))
-    
-    compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
-
     shade(api("xyz.unifycraft.confide:Confide-${mcVersionStr}-${mcPlatform}:1.0.0")) {
-        exclude module: "kotlin-stdlib-jdk8"
-        exclude module: "kotlin-reflect"
-        exclude module: "elementa-$mcVersionStr-$mcPlatform"
+        exclude(module: "kotlin-stdlib-jdk8")
+        exclude(module: "kotlin-reflect")
+        exclude(module: "elementa-$mcVersionStr-$mcPlatform")
     }
     shade(api("gg.essential:universalcraft-$mcVersionStr-$mcPlatform:181")) {
-        exclude module: "kotlin-stdlib-jdk8"
+        exclude(module: "kotlin-stdlib-jdk8")
     }
     shade(api("gg.essential:elementa-$mcVersionStr-$mcPlatform:425")) {
-        exclude module: "kotlin-stdlib-jdk8"
-        exclude module: "kotlin-reflect"
-        exclude module: "universalcraft-$mcVersionStr-$mcPlatform"
+        exclude(module: "kotlin-stdlib-jdk8")
+        exclude(module: "kotlin-reflect")
+        exclude(module: "universalcraft-$mcVersionStr-$mcPlatform")
     }
 
-    compileOnly("org.apache.logging.log4j:log4j-api:2.17.0")
-    compileOnly("org.apache.logging.log4j:log4j-core:2.17.0")
+    // Convenience.
+    shade("me.nullicorn:Nedit:2.1.1")
+    shade("net.hypixel:HypixelAPI:3.0.0") {
+        exclude(module: "gson")
+    }
 }
 
 processResources {
