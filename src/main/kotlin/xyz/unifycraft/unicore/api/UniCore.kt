@@ -5,7 +5,6 @@ import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
 import org.kodein.di.*
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
