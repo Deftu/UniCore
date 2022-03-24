@@ -206,7 +206,7 @@ afterEvaluate {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = archivesBaseName
+                artifactId = archivesBaseName.toLowerCase()
                 group = projectGroup
                 version = project.version
 
