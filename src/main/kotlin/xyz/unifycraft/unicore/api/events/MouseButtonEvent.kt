@@ -5,4 +5,4 @@ class MouseButtonEvent(
     val released: Boolean,
     val x: Double,
     val y: Double
-)
+) : CancellableEvent()

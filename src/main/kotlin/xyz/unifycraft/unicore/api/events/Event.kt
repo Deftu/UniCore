@@ -1,3 +1,3 @@
 package xyz.unifycraft.unicore.api.events
 
-class RenderTickEvent : Event()
+abstract class Event

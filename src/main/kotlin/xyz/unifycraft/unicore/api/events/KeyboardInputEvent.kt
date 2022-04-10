@@ -5,4 +5,4 @@ class KeyboardInputEvent(
     val repeated: Boolean,
     val typedChar: Char,
     val keyCode: Int
-)
+) : CancellableEvent()

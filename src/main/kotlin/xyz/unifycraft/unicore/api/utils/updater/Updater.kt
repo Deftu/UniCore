@@ -30,52 +30,54 @@ class Updater {
 
     @OptIn(DelicateCoroutinesApi::class)
     suspend fun check() {
-        val outdated = mutableListOf<UpdaterMod>()
-        for (mod in mods) {
-            GlobalScope.launch(Dispatchers.IO) {
-                mod.fetcher.check(this@Updater, mod)
-                if (mod.fetcher.hasUpdate()) outdated.add(mod).also {
-                    this@Updater.outdated = outdated
-                }
-            }
-        }
-
-        if (!registeredShutdownHook) {
-            Runtime.getRuntime().addShutdownHook(Thread({
-                var changes = false
-                val arguments = mutableListOf<File>()
-                for (mod in outdated) {
-                    if (mod.allowedUpdate) {
-                        try {
-                            if (System.getProperty("os.name").lowercase().contains("mac")) {
-                                val sipStatus = Runtime.getRuntime().exec("csrutil status")
-                                sipStatus.waitFor()
-                                if (!sipStatus.inputStream.use { it.bufferedReader().readText() }
-                                        .contains("System Integrity Protection status: disabled.")) {
-                                    UDesktop.open(mod.file.parentFile)
-                                }
-                            }
-
-                            arguments.add(mod.file)
-                            changes = true
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+        if (UniCore.getConfig().updateCheck) {
+            val outdated = mutableListOf<UpdaterMod>()
+            for (mod in mods) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    mod.fetcher.check(this@Updater, mod)
+                    if (mod.fetcher.hasUpdate()) outdated.add(mod).also {
+                        this@Updater.outdated = outdated
                     }
                 }
+            }
 
-                if (changes) UniCore.getDeleter().delete(arguments)
-            }, "${UniCore.getName()} Updater Deletion Thread"))
-            registeredShutdownHook = true
-        }
+            if (!registeredShutdownHook) {
+                Runtime.getRuntime().addShutdownHook(Thread({
+                    var changes = false
+                    val arguments = mutableListOf<File>()
+                    for (mod in outdated) {
+                        if (mod.allowedUpdate) {
+                            try {
+                                if (System.getProperty("os.name").lowercase().contains("mac")) {
+                                    val sipStatus = Runtime.getRuntime().exec("csrutil status")
+                                    sipStatus.waitFor()
+                                    if (!sipStatus.inputStream.use { it.bufferedReader().readText() }
+                                            .contains("System Integrity Protection status: disabled.")) {
+                                        UDesktop.open(mod.file.parentFile)
+                                    }
+                                }
 
-        if (outdated.isNotEmpty()) {
-            UniCore.getNotifications().post(
-                title = UniCore.getName(),
-                description = "Some of your mods are outdated! Click me to download updates.",
-                click = {
-                    UniCore.getGuiHelper().showScreen(ModUpdateListScreen(outdated))
-                })
+                                arguments.add(mod.file)
+                                changes = true
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+
+                    if (changes) UniCore.getDeleter().delete(arguments)
+                }, "${UniCore.getName()} Updater Deletion Thread"))
+                registeredShutdownHook = true
+            }
+
+            if (outdated.isNotEmpty()) {
+                UniCore.getNotifications().post(
+                    title = UniCore.getName(),
+                    description = "Some of your mods are outdated! Click me to download updates.",
+                    click = {
+                        UniCore.getGuiHelper().showScreen(ModUpdateListScreen(outdated))
+                    })
+            }
         }
     }
 
