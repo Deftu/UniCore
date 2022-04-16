@@ -10,7 +10,7 @@ plugins {
     id("maven-publish")
 }
 
-archivesBaseName = projectName
+archivesBaseName = "$projectName-${mcData.versionStr}-${mcData.loader.name}".toLowerCase()
 version = projectVersion
 group = "${projectGroup}.api"
 
@@ -91,7 +91,7 @@ afterEvaluate {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = archivesBaseName.toLowerCase()
+                artifactId = archivesBaseName
                 group = projectGroup
                 version = project.version
 
