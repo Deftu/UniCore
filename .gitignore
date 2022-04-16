@@ -23,6 +23,9 @@ build
 .nb-gradle
 .nb-gradle-properties
 
+# VSCode
+.vscode
+
 # other
 run
 .DS_Store

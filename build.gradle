@@ -1,12 +1,10 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version("7.1.2") apply(false)
-    id("org.jetbrains.kotlin.jvm") version("1.6.10") apply(false)
-    id("net.kyori.blossom") version("1.3.0") apply(false)
-    id("com.replaymod.preprocess") version("7746c47")
+    id("org.jetbrains.kotlin.jvm") version("1.6.20") apply(false)
+    id("xyz.unifycraft.gradle.multiversion-root") version("1.0.0")
 }
 
 preprocess {
-    def forge10809 = createNode("1.8.9", 10809, "srg")
+    def forge10809 = createNode("1.8.9-forge", 10809, "srg")
 }
 
 allprojects {
