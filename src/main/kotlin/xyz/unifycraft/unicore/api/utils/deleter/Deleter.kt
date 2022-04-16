@@ -18,9 +18,7 @@ class Deleter(
 
     fun initialize() {
         file = try {
-            dataDir.listFiles { dir, name ->
-                name.contains("deleter", true)
-            }.first()
+            dataDir.listFiles { dir: File, name: String -> name.contains("deleter", true) }.first()
         } catch (e: Exception) {
             File(dataDir, "Deleter.jar")
         }
