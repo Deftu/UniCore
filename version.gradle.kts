@@ -102,18 +102,23 @@ tasks {
     }
 }
 
-    /*afterEvaluate {
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+afterEvaluate {
     publishing {
         publications {
-            mavenJava(MavenPublication) {
+            create<MavenPublication>("mavenJava") {
                 artifactId = (tasks["jar"] as Jar).archiveBaseName.get()
                 group = projectGroup
-                version = project.version
+                version = project.version.toString()
 
-                artifact(unishadowJar)
-                artifact(sourcesJar)
-                artifact(javadocJar)
+                artifact(tasks["unishadowJar"])
+                artifact(tasks["sourcesJar"])
+                artifact(tasks["javadocJar"])
             }
         }
     }
-}*/
+}
