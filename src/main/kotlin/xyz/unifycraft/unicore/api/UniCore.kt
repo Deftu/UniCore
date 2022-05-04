@@ -9,6 +9,7 @@ import org.kodein.di.*
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
+import xyz.unifycraft.unicore.api.gui.hud.HudRegistry
 import xyz.unifycraft.unicore.api.gui.notifications.Notifications
 import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
 import xyz.unifycraft.unicore.api.utils.*
@@ -32,6 +33,7 @@ interface UniCore {
     fun notifications(): Notifications
     fun commandRegistry(): CommandRegistry
     fun keyBindRegistry(): KeyBindRegistry
+    fun hudRegistry(): HudRegistry
     fun httpRequester(): HttpRequester
     fun deleter(): Deleter
     fun updater(): Updater
@@ -80,6 +82,7 @@ interface UniCore {
         @JvmStatic fun getElementaHud() = instance.elementaHud()
         @JvmStatic fun getCommandRegistry() = instance.commandRegistry()
         @JvmStatic fun getKeyBindRegistry() = instance.keyBindRegistry()
+        @JvmStatic fun getHudRegistry() = instance.hudRegistry()
         @JvmStatic fun getNotifications() = instance.notifications()
         @JvmStatic fun getHttpRequester() = instance.httpRequester()
         @JvmStatic fun getDeleter() = instance.deleter()
