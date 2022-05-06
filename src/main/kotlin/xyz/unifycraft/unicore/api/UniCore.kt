@@ -1,6 +1,7 @@
 package xyz.unifycraft.unicore.api
 
 import com.google.gson.Gson
+import gg.essential.elementa.utils.ResourceCache
 import gg.essential.universal.ChatColor
 import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
@@ -29,6 +30,7 @@ interface UniCore {
     fun config(): UniCoreConfig
     fun jsonHelper(): JsonHelper
     fun guiHelper(): GuiHelper
+    fun elementaResourceCache(): ResourceCache
     fun elementaHud(): ElementaHud
     fun notifications(): Notifications
     fun commandRegistry(): CommandRegistry
@@ -79,6 +81,7 @@ interface UniCore {
         @JvmStatic fun getConfig() = instance.config()
         @JvmStatic fun getJsonHelper() = instance.jsonHelper()
         @JvmStatic fun getGuiHelper() = instance.guiHelper()
+        @JvmStatic fun getElementaResourceCache() = instance.elementaResourceCache()
         @JvmStatic fun getElementaHud() = instance.elementaHud()
         @JvmStatic fun getCommandRegistry() = instance.commandRegistry()
         @JvmStatic fun getKeyBindRegistry() = instance.keyBindRegistry()
