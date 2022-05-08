@@ -30,6 +30,7 @@ interface UniCore {
     fun config(): UniCoreConfig
     fun jsonHelper(): JsonHelper
     fun guiHelper(): GuiHelper
+    fun modLoaderHelper(): ModLoaderHelper
     fun elementaResourceCache(): ResourceCache
     fun elementaHud(): ElementaHud
     fun notifications(): Notifications
@@ -81,6 +82,7 @@ interface UniCore {
         @JvmStatic fun getConfig() = instance.config()
         @JvmStatic fun getJsonHelper() = instance.jsonHelper()
         @JvmStatic fun getGuiHelper() = instance.guiHelper()
+        @JvmStatic fun getModLoaderHelper() = instance.modLoaderHelper()
         @JvmStatic fun getElementaResourceCache() = instance.elementaResourceCache()
         @JvmStatic fun getElementaHud() = instance.elementaHud()
         @JvmStatic fun getCommandRegistry() = instance.commandRegistry()
