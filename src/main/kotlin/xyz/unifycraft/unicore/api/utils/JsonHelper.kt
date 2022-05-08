@@ -1,22 +1,17 @@
 package xyz.unifycraft.unicore.api.utils
 
+import com.google.gson.Gson
 import xyz.unifycraft.unicore.api.UniCore
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 
-class JsonHelper {
-
+interface JsonHelper {
+    val gson: Gson
     //#if MC<=11202
-    val jsonParser = JsonParser()
+    val jsonParser: JsonParser
     //#else
 
-    fun parse(json: String): JsonElement {
-        //#if MC<=11202
-        return jsonParser.parse(json)
-        //#else
-        //$$ JsonParser.parseString(json)
-        //#endif
-    }
+    fun parse(json: String): JsonElement
 }
 
 /**
