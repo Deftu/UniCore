@@ -3,31 +3,31 @@ package xyz.unifycraft.unicore.api.utils
 import xyz.unifycraft.unicore.api.UniCore
 import java.awt.Color
 
-class ColorHelper {
+interface ColorHelper {
     /**
      * @return A changing colour based on the users' computer time. Simulates a "chroma" colour.
      */
-    fun getChroma() = Color.HSBtoRGB(System.currentTimeMillis() % 2000L / 2000.0f, 1.0f, 1.0f)
+    fun getChroma(): Int
 
     /**
      * @return The red value of the provided RGBA value.
      */
-    fun getRed(rgba: Int) = (rgba shr 16) and 0xFF
+    fun getRed(rgba: Int): Int
 
     /**
      * @return The green value of the provided RGBA value.
      */
-    fun getGreen(rgba: Int) = (rgba shr 8) and 0xFF
+    fun getGreen(rgba: Int): Int
 
     /**
      * @return The blue value of the provided RGBA value.
      */
-    fun getBlue(rgba: Int) = (rgba shr 0) and 0xFF
+    fun getBlue(rgba: Int): Int
 
     /**
      * @return The alpha value of the provided RGBA value.
      */
-    fun getAlpha(rgba: Int) = (rgba shr 24) and 0xFF
+    fun getAlpha(rgba: Int): Int
 }
 
 /**
