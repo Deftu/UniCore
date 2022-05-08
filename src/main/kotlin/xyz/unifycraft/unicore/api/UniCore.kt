@@ -66,7 +66,7 @@ interface UniCore {
 
         private val chatPrefix = chatPrefix {
             name = getName()
-            color = ChatColor.BLUE
+            color = ChatColor.DARK_PURPLE
             brackets {
                 type = ChatPrefixType.CARET
             }
