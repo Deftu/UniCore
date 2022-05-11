@@ -19,6 +19,11 @@ import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
 import xyz.unifycraft.unicore.api.utils.updater.Updater
 
+/**
+ * The main class of the UniCore
+ * API, this is where all the magic
+ * happens.
+ */
 interface UniCore {
     fun initialize(event: InitializationEvent)
     fun withInstance(instance: UniCore)

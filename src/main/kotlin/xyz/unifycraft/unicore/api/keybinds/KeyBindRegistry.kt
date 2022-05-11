@@ -1,11 +1,33 @@
 package xyz.unifycraft.unicore.api.keybinds
 
-import xyz.unifycraft.unicore.api.keybinds.annotations.KeyBind
 import com.google.common.collect.Multimap
 
+/**
+ * UniCore's keybind registry
+ * and manager for it's keybind
+ * API.
+ */
 interface KeyBindRegistry {
     val keyBinds: Multimap<Int, BaseKeyBind>
+    /**
+     * Registers a new keybind
+     * using the abstract class.
+     *
+     * @param keyBind The keybind to register.
+     */
     fun registerKeyBind(keyBind: BaseKeyBind): Boolean
-    fun registerKeyBind(command: Class<*>) = registerKeyBind(command.getConstructor().newInstance())
-    fun registerKeyBind(command: Any) = registerKeyBind(AnnotationKeyBind(command::class.java.getAnnotation(KeyBind::class.java), command::class.java, command))
+    /**
+     * Removes a new keybind
+     * using the annotation API.
+     *
+     * @param keyBind The keybind to register.
+     */
+    fun registerKeyBind(keyBind: Any): Boolean
+    /**
+     * Removes a new keybind
+     * using the annotation API.
+     *
+     * @param keyBind The keybind to register.
+     */
+    fun registerKeyBind(keyBind: Class<*>) = registerKeyBind(keyBind.getConstructor().newInstance())
 }

@@ -1,7 +1,10 @@
 package xyz.unifycraft.unicore.api.commands
 
-import xyz.unifycraft.unicore.api.commands.annotations.Command
-
+/**
+ * UniCore's command registry
+ * and manager for it's command
+ * API.
+ */
 interface CommandRegistry {
     val commands: Map<String, BaseCommand>
     fun registerCommand(command: BaseCommand)

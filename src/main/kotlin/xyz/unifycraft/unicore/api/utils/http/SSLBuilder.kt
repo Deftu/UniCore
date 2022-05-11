@@ -17,6 +17,13 @@ class SSLBuilder {
         keystore.load(Files.newInputStream(Paths.get(System.getProperty("java.home"), "lib", "security", "cacerts")), null)
     }
 
+    /**
+     * Loads the certificate into the keystore.
+     *
+     * @param name The name of the certificate.
+     * @param path The path to the certificate.
+     * @return The SSLBuilder instance.
+     */
     fun load(name: String, path: String) = apply {
         UniCore::class.java.getResourceAsStream("/$path")?.use { input ->
             val buffer = BufferedInputStream(input)
@@ -25,6 +32,11 @@ class SSLBuilder {
         }
     }
 
+    /**
+     * Builds the SSLContext.
+     *
+     * @return The SSLContext built from the keystore.
+     */
     fun build(): SSLContext {
         val trustFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
         trustFactory.init(keystore)

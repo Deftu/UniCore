@@ -5,23 +5,31 @@ import xyz.unifycraft.unicore.api.UniCore
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 
+/**
+ * A utility class making
+ * JSON parsing easier and
+ * more accessible cross-version.
+ */
 interface JsonHelper {
     val gson: Gson
     //#if MC<=11202
     val jsonParser: JsonParser
     //#else
 
+    /**
+     * @return The string provided as a JSON element.
+     */
     fun parse(json: String): JsonElement
 }
 
 /**
- * Return the string provided as a [JsonElement].
+ * @see [JsonHelper.parse]
+ * @return the string as a [JsonElement].
  */
-fun String.toJsonSafe() = runCatching { return@runCatching this.toJson() }
+fun String.toJsonSafe() = runCatching { return@runCatching toJson() }
 
 /**
- * Return the string provided as a [JsonElement]
- *
- * @return string as a [JsonElement]
+ * @see [JsonHelper.parse]
+ * @return the string as a [JsonElement].
  */
 fun String.toJson() = UniCore.getJsonHelper().parse(this)

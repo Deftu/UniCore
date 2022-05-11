@@ -4,7 +4,16 @@ import java.util.*
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
+/**
+ * Makes it possible to create
+ * "delayed" instances, which
+ * are effectively lateinit.
+ */
 fun <T> instance() = DelayedInstanceDelegator<T>()
+/**
+ * Creates an instance of a class
+ * using Java's service loader API.
+ */
 inline fun <reified T> service() = ServiceLoaderDelegator(T::class.java)
 
 class DelayedInstanceDelegator<T> : ReadWriteProperty<Any?, T> {

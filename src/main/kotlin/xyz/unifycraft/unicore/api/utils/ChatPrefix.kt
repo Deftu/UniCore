@@ -2,6 +2,11 @@ package xyz.unifycraft.unicore.api.utils
 
 import gg.essential.universal.ChatColor
 
+/**
+ * Provides a simple way to build
+ * a chat prefix with a color, brackets
+ * and different bracket types.
+ */
 class ChatPrefixBuilder {
     private val block = ChatPrefixBlock()
     fun setName(name: String) = apply { block.name = name }
@@ -12,6 +17,11 @@ class ChatPrefixBuilder {
     fun build() = block.build()
 }
 
+/**
+ * Provides a simple way to build
+ * a chat suffix with a color, brackets
+ * and different bracket types.
+ */
 fun chatPrefix(block: ChatPrefixBlock.() -> Unit) =
     ChatPrefixBlock().apply(block).build()
 
