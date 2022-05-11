@@ -7,6 +7,7 @@ import me.kbrewster.eventbus.EventBus
 import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.LogManager
 import org.kodein.di.*
+import xyz.deftu.deftils.Multithreader
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
@@ -25,6 +26,7 @@ interface UniCore {
 
     fun gson(): Gson
     fun eventBus(): EventBus
+    fun multithreader(): Multithreader
 
     fun fileHelper(): FileHelper
     fun config(): UniCoreConfig
@@ -77,6 +79,7 @@ interface UniCore {
         @JvmStatic fun getLogger() = LogManager.getLogger(getName())
         @JvmStatic fun getGson() = instance.gson()
         @JvmStatic fun getEventBus() = instance.eventBus()
+        @JvmStatic fun getMultithreader() = instance.multithreader()
 
         @JvmStatic fun getFileHelper() = instance.fileHelper()
         @JvmStatic fun getConfig() = instance.config()

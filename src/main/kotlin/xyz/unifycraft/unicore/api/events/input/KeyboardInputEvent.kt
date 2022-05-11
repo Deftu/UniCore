@@ -1,4 +1,6 @@
-package xyz.unifycraft.unicore.api.events
+package xyz.unifycraft.unicore.api.events.input
+
+import xyz.unifycraft.unicore.api.events.CancellableEvent
 
 class KeyboardInputEvent(
     val released: Boolean,

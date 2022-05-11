@@ -1,6 +1,5 @@
 package xyz.unifycraft.unicore.api.utils.updater
 
-import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion
 import java.io.File
 
 interface Updater {

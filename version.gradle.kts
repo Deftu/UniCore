@@ -40,7 +40,7 @@ dependencies {
     // Internal libraries, also serve as convenience for other mods.
     unishade("org.kodein.di:kodein-di:7.10.0")
     unishade(api("com.github.KevinPriv:keventbus:master-SNAPSHOT")!!)
-    unishade("xyz.deftu.deftils:Deftils:1.2.2")
+    unishade("xyz.deftu.deftils:Deftils:2.0.0")
     unishade("com.github.ben-manes.caffeine:caffeine:2.9.3")
     unishade(api("org.java-websocket:Java-WebSocket:1.5.2")!!)
     unishade(api("xyz.deftu.quicksocket:QuickSocket:1.2.2")!!)
