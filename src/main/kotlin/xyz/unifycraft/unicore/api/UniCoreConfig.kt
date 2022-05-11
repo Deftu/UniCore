@@ -8,8 +8,4 @@ class UniCoreConfig : Config(
     file = File(UniCore.getFileHelper().dataDir, "config.json"),
     title = UniCore.getName()
 ) {
-    var updateCheck by switch(true) {
-        name = "Update Check"
-        description = "Should UniCore check for updates?"
-    }
 }
