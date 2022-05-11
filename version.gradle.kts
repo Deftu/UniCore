@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import xyz.unifycraft.gradle.utils.GameSide
 import xyz.unifycraft.gradle.utils.disableRunConfigs
@@ -6,7 +7,8 @@ import xyz.unifycraft.gradle.utils.useMinecraftTweaker
 
 plugins {
     id("org.jetbrains.kotlin.jvm")
-    id("java")
+    id("org.jetbrains.dokka") version("1.6.21")
+    id("java-library")
     id("net.kyori.blossom") version("1.3.0")
     id("xyz.unifycraft.gradle.multiversion")
     id("xyz.unifycraft.gradle.tools")
@@ -66,6 +68,11 @@ dependencies {
     }
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 tasks {
     withType<KotlinCompile> {
         kotlinOptions {
@@ -76,6 +83,11 @@ tasks {
     named<Jar>("jar") {
         val projectName: String by project
         archiveBaseName.set("$projectName-${mcData.versionStr}-${mcData.loader.name}".toLowerCase())
+    }
+
+    named<Jar>("javadocJar") {
+        dependsOn("dokkaJavadoc")
+        from(javadoc)
     }
 
     named<ShadowJar>("unishadowJar") {
@@ -100,11 +112,12 @@ tasks {
         exclude("**/*.kotlin_metadata")
         exclude("**/*.kotlin_builtins")
     }
-}
 
-java {
-    withSourcesJar()
-    withJavadocJar()
+    artifacts {
+        archives(unishadowJar)
+        archives(project.tasks["sourcesJar"])
+        archives(project.tasks["javadocJar"])
+    }
 }
 
 afterEvaluate {
@@ -118,6 +131,7 @@ afterEvaluate {
                 artifact(tasks["unishadowJar"])
                 artifact(tasks["sourcesJar"])
                 artifact(tasks["javadocJar"])
+                from(components["java"])
             }
         }
     }
