@@ -33,6 +33,7 @@ interface UniCore {
     fun modLoaderHelper(): ModLoaderHelper
     fun elementaResourceCache(): ResourceCache
     fun elementaHud(): ElementaHud
+    fun messageQueue(): MessageQueue
     fun notifications(): Notifications
     fun commandRegistry(): CommandRegistry
     fun keyBindRegistry(): KeyBindRegistry
@@ -158,6 +159,15 @@ interface UniCore {
          * @return UniCore's Elementa HUD instance.
          */
         @JvmStatic fun getElementaHud() = instance.elementaHud()
+        /**
+         * Provides UniCore's message queue utility,
+         * which allows mods to queue messages to be
+         * sent by the player to the currently open
+         * (integrated) server.
+         *
+         * @return UniCore's message queue instance.
+         */
+        @JvmStatic fun getMessageQueue() = instance.messageQueue()
         /**
          * Provides UniCore's command registry,
          * which is based on JVM annotations
