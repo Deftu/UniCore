@@ -3,10 +3,6 @@ package xyz.unifycraft.unicore.api.utils
 import gg.essential.universal.UDesktop
 import java.net.URI
 
-interface InternetHelper {
-    /* Things to be added when needed. */
-}
-
 /**
  * Open a website URL in the user's web browser.
  * @param url website URL
