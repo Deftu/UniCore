@@ -35,6 +35,7 @@ interface UniCore {
     fun config(): UniCoreConfig
     fun jsonHelper(): JsonHelper
     fun guiHelper(): GuiHelper
+    fun chatHelper(): ChatHelper
     fun modLoaderHelper(): ModLoaderHelper
     fun elementaResourceCache(): ResourceCache
     fun elementaHud(): ElementaHud
@@ -141,6 +142,14 @@ interface UniCore {
          * @return UniCore's GUI utility instance.
          */
         @JvmStatic fun getGuiHelper() = instance.guiHelper()
+        /**
+         * A chat utility which provides easy access
+         * to commonly used chat functions and other
+         * miscellaneous utilities.
+         *
+         * @return UniCore's chat utility instance.
+         */
+        @JvmStatic fun getChatHelper() = instance.chatHelper()
         /**
          * Provides an easy way to access a few
          * mod loader internals without having to

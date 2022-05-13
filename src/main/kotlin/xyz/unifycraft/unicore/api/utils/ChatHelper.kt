@@ -49,5 +49,13 @@ interface ChatHelper {
      * @see [retrievePlayer]
      * @param regex The regex to add.
      */
+    fun addPlayerRegex(regex: Regex)
+    /**
+     * Adds a regex to the player
+     * name search for [retrievePlayer].
+     *
+     * @see [retrievePlayer]
+     * @param regex The regex to add.
+     */
     fun addPlayerRegex(regex: String)
 }

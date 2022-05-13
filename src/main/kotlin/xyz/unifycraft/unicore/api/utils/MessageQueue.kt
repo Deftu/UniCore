@@ -72,4 +72,8 @@ interface MessageQueue {
      * @param text The text to use.
      */
     fun queue(text: String)
+
+    companion object {
+        const val DEFAULT_DELAY = 15
+    }
 }
