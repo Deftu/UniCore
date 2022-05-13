@@ -35,5 +35,5 @@ interface Updater {
      * which are currently in the
      * registry.
      */
-    suspend fun check()
+    fun check()
 }

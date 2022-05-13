@@ -8,7 +8,8 @@ data class UpdaterMod(
     val id: String,
     val path: String,
     val fetcher: UpdateFetcher,
-    val file: File
+    val file: File,
+    val changelog: String = ""
 ) {
     var allowedUpdate = false
 }
