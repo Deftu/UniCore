@@ -7,7 +7,7 @@ import java.io.File
  */
 interface Updater {
     val mods: List<UpdaterMod>
-    var outdated: List<UpdaterMod>
+    val outdated: List<UpdaterMod>
 
     /**
      * Adds a mod to the updater
