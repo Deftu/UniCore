@@ -10,7 +10,6 @@ import xyz.deftu.deftils.Multithreader
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ElementaHud
-import xyz.unifycraft.unicore.api.gui.hud.HudRegistry
 import xyz.unifycraft.unicore.api.gui.notifications.Notifications
 import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
 import xyz.unifycraft.unicore.api.utils.*
@@ -43,7 +42,6 @@ interface UniCore {
     fun notifications(): Notifications
     fun commandRegistry(): CommandRegistry
     fun keyBindRegistry(): KeyBindRegistry
-    fun hudRegistry(): HudRegistry
     fun httpRequester(): HttpRequester
     fun deleter(): Deleter
     fun updater(): Updater
@@ -205,15 +203,6 @@ interface UniCore {
          * @return UniCore's keybind registry instance.
          */
         @JvmStatic fun getKeyBindRegistry() = instance.keyBindRegistry()
-        /**
-         * Provides UniCore's HUD registry,
-         * which is based on the Elementa
-         * library and makes creating HUDs
-         * much simpler than building it yourself.
-         *
-         * @return UniCore's HUD registry instance.
-         */
-        @JvmStatic fun getHudRegistry() = instance.hudRegistry()
         /**
          * Provides UniCore's notification
          * manager, which allows you to
