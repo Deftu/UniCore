@@ -27,4 +27,4 @@ on [our website][website] and in [our Discord server][discord].
 [bugreps]: https://github.com/UnifyCraft/UniCore/issues/new/
 [featreqs]: https://github.com/UnifyCraft/UniCore/issues/new/
 [website]: https://www.unifycraft.xyz/
-[discord]: https://discord.gg/bhGeqQ3XE3
+[discord]: https://discord.gg/y5mCCt4bxQ
