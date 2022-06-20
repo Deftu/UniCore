@@ -9,6 +9,7 @@ import org.kodein.di.*
 import xyz.deftu.deftils.Multithreader
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
+import xyz.unifycraft.unicore.api.gui.ComponentFactory
 import xyz.unifycraft.unicore.api.gui.ElementaHud
 import xyz.unifycraft.unicore.api.gui.notifications.Notifications
 import xyz.unifycraft.unicore.api.keybinds.KeyBindRegistry
@@ -16,6 +17,7 @@ import xyz.unifycraft.unicore.api.utils.*
 import xyz.unifycraft.unicore.api.utils.deleter.Deleter
 import xyz.unifycraft.unicore.api.utils.http.HttpRequester
 import xyz.unifycraft.unicore.api.utils.hypixel.HypixelHelper
+import xyz.unifycraft.unicore.api.utils.text.TextHelper
 import xyz.unifycraft.unicore.api.utils.updater.Updater
 
 /**
@@ -32,8 +34,10 @@ interface UniCore {
 
     fun fileHelper(): FileHelper
     fun config(): UniCoreConfig
+    fun componentFactory(): ComponentFactory
     fun jsonHelper(): JsonHelper
     fun guiHelper(): GuiHelper
+    fun textHelper(): TextHelper
     fun chatHelper(): ChatHelper
     fun modLoaderHelper(): ModLoaderHelper
     fun elementaResourceCache(): ResourceCache
@@ -73,7 +77,7 @@ interface UniCore {
         /**
          * @return The current version of UniCore.
          */
-        @JvmStatic fun getVersion() = "__VERSION__"
+        @JvmStatic fun getVersion() = "@MOD_VERSION@"
         /**
          * @return UniCore's name.
          */
@@ -127,6 +131,10 @@ interface UniCore {
          */
         @JvmStatic fun getConfig() = instance.config()
         /**
+         * @return UniCore's component factory instance.
+         */
+        @JvmStatic fun getComponentFactory() = instance.componentFactory()
+        /**
          * A JSON utility which makes handling JSON
          * across multiple Minecraft versions much simpler.
          *
@@ -140,6 +148,13 @@ interface UniCore {
          * @return UniCore's GUI utility instance.
          */
         @JvmStatic fun getGuiHelper() = instance.guiHelper()
+        /**
+         * A text utility which makes the use
+         * of text in-game much easier.
+         *
+         * @return UniCore's text utility instance.
+         */
+        @JvmStatic fun getTextHelper() = instance.textHelper()
         /**
          * A chat utility which provides easy access
          * to commonly used chat functions and other

@@ -1,31 +1,30 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import xyz.unifycraft.gradle.utils.GameSide
-import xyz.unifycraft.gradle.utils.disableRunConfigs
-import xyz.unifycraft.gradle.utils.useMinecraftTweaker
 
 plugins {
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.dokka") version("1.6.21")
-    id("java-library")
-    id("net.kyori.blossom") version("1.3.0")
+    kotlin("jvm")
+    `java-library`
+    `maven-publish`
     id("xyz.unifycraft.gradle.multiversion")
     id("xyz.unifycraft.gradle.tools")
-    id("xyz.unifycraft.gradle.snippets.shadow")
-    id("maven-publish")
+    id("xyz.unifycraft.gradle.tools.shadow")
+    id("xyz.unifycraft.gradle.tools.blossom")
+    id("xyz.unifycraft.gradle.tools.dokka")
 }
 
-val projectVersion: String by project
-version = projectVersion
-val projectGroup: String by project
-group = "${projectGroup}.api"
+base.archivesName.set("${modData.name}-${mcData.versionStr}-${mcData.loader.name}".toLowerCase())
 
-useMinecraftTweaker("xyz.unifycraft.unicore.api.mixins.UniCoreDevTweaker")
-loom.disableRunConfigs(GameSide.GLOBAL)
+loomHelper {
+    disableRunConfigs(GameSide.GLOBAL)
+}
 
 blossom {
-    replaceToken("__VERSION__", project.version)
+    replaceToken("@@WIKI_URL@@", "https://wiki.unifycraft.xyz")
+}
+
+repositories {
+    maven("https://repo.hypixel.net/repository/Hypixel/")
 }
 
 dependencies {
@@ -34,13 +33,15 @@ dependencies {
         11202 to "0.7.11-SNAPSHOT",
         10809 to "0.7.11-SNAPSHOT"
     )[mcData.version])
+    unishade(annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.10")!!)
 
     // Kotlin language.
     unishade("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
     unishade("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Internal libraries, also serve as convenience for other mods.
-    unishade("org.kodein.di:kodein-di:7.10.0")
+    unishade("org.kodein.di:kodein-di:7.12.0")
+    unishade("org.kodein.di:kodein-di-jvm:7.12.0")
     unishade(api("com.github.KevinPriv:keventbus:master-SNAPSHOT")!!)
     unishade(api("xyz.deftu.deftils:Deftils:2.0.0")!!)
     unishade("com.github.ben-manes.caffeine:caffeine:2.9.3")
@@ -68,26 +69,11 @@ dependencies {
     }
 }
 
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
 tasks {
     withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
         }
-    }
-
-    named<Jar>("jar") {
-        val projectName: String by project
-        archiveBaseName.set("$projectName-${mcData.versionStr}-${mcData.loader.name}".toLowerCase())
-    }
-
-    named<Jar>("javadocJar") {
-        dependsOn("dokkaJavadoc")
-        from(javadoc)
     }
 
     named<ShadowJar>("unishadowJar") {
@@ -112,26 +98,12 @@ tasks {
         exclude("**/*.kotlin_metadata")
         exclude("**/*.kotlin_builtins")
     }
-
-    artifacts {
-        archives(unishadowJar)
-        archives(project.tasks["sourcesJar"])
-        archives(project.tasks["javadocJar"])
-    }
 }
 
 afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("mavenJava") {
-                artifactId = (tasks["jar"] as Jar).archiveBaseName.get()
-                group = projectGroup
-                version = project.version.toString()
-
-                artifact(project.tasks["unishadowJar"])
-                artifact(project.tasks["sourcesJar"])
-                artifact(project.tasks["javadocJar"])
-            }
-        }
+    publishing.publications.getByName<MavenPublication>("mavenJava") {
+        group = modData.group
+        artifactId = base.archivesName.get()
+        version = modData.version
     }
 }
