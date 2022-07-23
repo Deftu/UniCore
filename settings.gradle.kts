@@ -18,6 +18,10 @@ pluginManagement {
         maven("https://s01.oss.sonatype.org/content/groups/public/")
         mavenLocal()
     }
+
+    plugins {
+        id("xyz.unifycraft.gradle.multiversion-root") version("1.9.2")
+    }
 }
 
 rootProject.name = "UniCore"

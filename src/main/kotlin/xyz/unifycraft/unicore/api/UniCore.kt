@@ -52,6 +52,7 @@ interface UniCore {
     fun mojangHelper(): MojangHelper
     fun hypixelHelper(): HypixelHelper
     fun colorHelper(): ColorHelper
+    // TODO - fun inventoryHelper(): InventoryHelper
 
     companion object {
         var initialized = false

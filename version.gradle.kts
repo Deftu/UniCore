@@ -48,7 +48,7 @@ dependencies {
     unishade(api("org.java-websocket:Java-WebSocket:1.5.2")!!)
     unishade(api("xyz.deftu.quicksocket:QuickSocket:1.2.2")!!)
     unishade(api("com.squareup.okhttp3:okhttp:4.9.3")!!)
-    unishade(api("xyz.unifycraft.configured:configured-${mcData.versionStr}-${mcData.loader.name}:1.0.0") {
+    unishade(api("xyz.unifycraft.configured:configured-${mcData.versionStr}-${mcData.loader.name}:1.0.0-alpha.1") {
         exclude(module = "kotlin-stdlib-jdk8")
         exclude(module = "kotlin-reflect")
         exclude(module = "elementa-${mcData.versionStr}-${mcData.loader.name}")

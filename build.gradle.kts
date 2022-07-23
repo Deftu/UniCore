@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version("1.6.21") apply(false)
-    id("xyz.unifycraft.gradle.multiversion-root") version("1.6.1-beta.2")
+    id("xyz.unifycraft.gradle.multiversion-root")
 }
 
 preprocess {
