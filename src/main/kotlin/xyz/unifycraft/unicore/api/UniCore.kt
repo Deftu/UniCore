@@ -2,11 +2,11 @@ package xyz.unifycraft.unicore.api
 
 import gg.essential.elementa.utils.ResourceCache
 import gg.essential.universal.ChatColor
-import me.kbrewster.eventbus.EventBus
-import me.kbrewster.eventbus.Subscribe
 import org.apache.logging.log4j.LogManager
 import org.kodein.di.*
 import xyz.deftu.deftils.Multithreader
+import xyz.unifycraft.ueventbus.EventBus
+import xyz.unifycraft.ueventbus.Subscribe
 import xyz.unifycraft.unicore.api.commands.CommandRegistry
 import xyz.unifycraft.unicore.api.events.InitializationEvent
 import xyz.unifycraft.unicore.api.gui.ComponentFactory
@@ -52,7 +52,6 @@ interface UniCore {
     fun mojangHelper(): MojangHelper
     fun hypixelHelper(): HypixelHelper
     fun colorHelper(): ColorHelper
-    // TODO - fun inventoryHelper(): InventoryHelper
 
     companion object {
         var initialized = false
@@ -73,7 +72,9 @@ interface UniCore {
             } else false
         }
 
-        @Subscribe private fun onInitialize(event: InitializationEvent) = instance.initialize(event)
+        @Subscribe
+        private fun onInitialize(event: InitializationEvent) =
+            instance.initialize(event)
 
         /**
          * @return The current version of UniCore.

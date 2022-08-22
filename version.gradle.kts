@@ -15,17 +15,34 @@ plugins {
 
 base.archivesName.set("${modData.name}-${mcData.versionStr}-${mcData.loader.name}".toLowerCase())
 
+extensions.configure<JavaPluginExtension> {
+    toolchain.languageVersion.set(JavaLanguageVersion.of("17"))
+}
+
 loomHelper {
     disableRunConfigs(GameSide.GLOBAL)
 }
 
 blossom {
-    replaceToken("@@WIKI_URL@@", "https://wiki.unifycraft.xyz")
+    replaceToken("@DOCS@", "https://docs.unifycraft.xyz")
 }
 
 repositories {
     maven("https://repo.hypixel.net/repository/Hypixel/")
 }
+
+fun Dependency?.excludeVitals(): Dependency = apply {
+    check(this is ModuleDependency)
+    exclude(module = "kotlin-stdlib")
+    exclude(module = "kotlin-stdlib-common")
+    exclude(module = "kotlin-stdlib-jdk8")
+    exclude(module = "kotlin-stdlib-jdk7")
+    exclude(module = "kotlin-reflect")
+    exclude(module = "annotations")
+    exclude(module = "fabric-loader")
+    exclude(module = "elementa-${mcData.versionStr}-${mcData.loader.name}")
+    exclude(module = "universalcraft-${mcData.versionStr}-${mcData.loader.name}")
+}!!
 
 dependencies {
     unishade("org.spongepowered:mixin:" + mapOf(
@@ -33,38 +50,36 @@ dependencies {
         11202 to "0.7.11-SNAPSHOT",
         10809 to "0.7.11-SNAPSHOT"
     )[mcData.version])
-    unishade(annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.10")!!)
+    unishade(annotationProcessor("com.github.LlamaLad7:MixinExtras:${libs.versions.mixinExtras.get()}")!!)
 
-    // Kotlin language.
-    unishade("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
-    unishade("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // Language
+    unishade(kotlin("stdlib"))
+    unishade("org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.versions.kotlinxCoroutines.get()}")
+    unishade("org.kodein.di:kodein-di:${libs.versions.kodein.get()}")
+    unishade("org.kodein.di:kodein-di-jvm:${libs.versions.kodein.get()}")
 
-    // Internal libraries, also serve as convenience for other mods.
-    unishade("org.kodein.di:kodein-di:7.12.0")
-    unishade("org.kodein.di:kodein-di-jvm:7.12.0")
-    unishade(api("com.github.KevinPriv:keventbus:master-SNAPSHOT")!!)
-    unishade(api("xyz.deftu.deftils:Deftils:2.0.0")!!)
-    unishade("com.github.ben-manes.caffeine:caffeine:2.9.3")
-    unishade(api("org.java-websocket:Java-WebSocket:1.5.2")!!)
-    unishade(api("xyz.deftu.quicksocket:QuickSocket:1.2.2")!!)
-    unishade(api("com.squareup.okhttp3:okhttp:4.9.3")!!)
-    unishade(api("xyz.unifycraft.configured:configured-${mcData.versionStr}-${mcData.loader.name}:1.0.0-alpha.1") {
-        exclude(module = "kotlin-stdlib-jdk8")
-        exclude(module = "kotlin-reflect")
-        exclude(module = "elementa-${mcData.versionStr}-${mcData.loader.name}")
-    })
-    unishade(api("gg.essential:universalcraft-${mcData.versionStr}-${mcData.loader.name}:181") {
-        exclude(module = "kotlin-stdlib-jdk8")
-    })
-    unishade(api("gg.essential:elementa-${mcData.versionStr}-${mcData.loader.name}:441") {
-        exclude(module = "kotlin-stdlib-jdk8")
-        exclude(module = "kotlin-reflect")
-        exclude(module = "universalcraft-${mcData.versionStr}-${mcData.loader.name}")
-    })
+    // Internal server
+    unishade(api("org.java-websocket:Java-WebSocket:${libs.versions.websocket.get()}")!!)
+    unishade(api("xyz.deftu.quicksocket:QuickSocket:${libs.versions.quicksocket.get()}")!!)
+    unishade(api("com.squareup.okhttp3:okhttp:${libs.versions.okhttp.get()}")!!)
 
-    // Convenience.
-    unishade("me.nullicorn:Nedit:2.1.1")
-    unishade("net.hypixel:hypixel-api-transport-reactor:4.2") {
+    // UI
+    unishade(modApi(libs.versions.configured.map {
+        "xyz.unifycraft.configured:configured-${mcData.versionStr}-${mcData.loader.name}:$it"
+    }.get()).excludeVitals())
+    unishade(modApi(libs.versions.universalcraft.map {
+        "gg.essential:universalcraft-${mcData.versionStr}-${mcData.loader.name}:$it"
+    }.get()).excludeVitals())
+    unishade(modApi(libs.versions.elementa.map {
+        "gg.essential:elementa-${mcData.versionStr}-${mcData.loader.name}:$it"
+    }.get()).excludeVitals())
+
+    // Utility
+    unishade("xyz.unifycraft:UEventBus:${libs.versions.ueventbus.get()}")
+    unishade(api("xyz.deftu.deftils:Deftils:${libs.versions.deftils.get()}")!!)
+    unishade("com.github.ben-manes.caffeine:caffeine:${libs.versions.caffeine.get()}")
+    unishade("me.nullicorn:Nedit:${libs.versions.nedit.get()}")
+    unishade("net.hypixel:hypixel-api-transport-reactor:${libs.versions.hypixelapi.get()}") {
         exclude(module = "gson")
     }
 }
