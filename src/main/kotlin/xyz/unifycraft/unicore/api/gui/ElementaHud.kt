@@ -1,16 +1,9 @@
 package xyz.unifycraft.unicore.api.gui
 
 import xyz.unifycraft.unicore.api.UniCore
-import xyz.unifycraft.unicore.api.events.*
-import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.Window
-import gg.essential.elementa.constraints.RelativeConstraint
-import gg.essential.elementa.dsl.childOf
-import gg.essential.elementa.dsl.constrain
-import gg.essential.universal.UMatrixStack
-import me.kbrewster.eventbus.Subscribe
 
 /**
  * UniCore's Elementa-based HUD system.
