@@ -17,9 +17,9 @@ enum class VersionType(
     }
 
     fun compare(other: VersionType): Int {
-        if (this == VersionType.RELEASE && other != VersionType.RELEASE)
+        if (this == RELEASE && other != RELEASE)
             return -1
-        if (this == VersionType.BETA && !other.isOf(VersionType.RELEASE, VersionType.BETA))
+        if (this == BETA && !other.isOf(RELEASE, BETA))
             return -1
         return 0
     }
