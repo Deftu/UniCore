@@ -1,4 +1,4 @@
-<div align="center">
+<center>
 
 # `UniCore`
 Minecraft core modding library made to unify all mods as one.\
@@ -6,7 +6,7 @@ Minecraft core modding library made to unify all mods as one.\
 ·
 [Request a Feature][featreqs]
 
-</div>
+</center>
 
 UniCore is the ultimate Minecraft mod and library,
 adding many new APIs and ways to engineer your own
