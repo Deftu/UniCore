@@ -1,6 +1,6 @@
 <div align="center">
 
-# `UniCore`
+# [`UniCore`]
 Minecraft core modding library made to unify all mods as one.\
 [Report a Bug][bugreps]
 ·
