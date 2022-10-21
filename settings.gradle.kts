@@ -20,7 +20,7 @@ pluginManagement {
     }
 
     plugins {
-        id("xyz.unifycraft.gradle.multiversion-root") version("1.10.3")
+        id("xyz.unifycraft.gradle.multiversion-root") version("1.11.5")
     }
 }
 
@@ -28,7 +28,17 @@ rootProject.name = "UniCore"
 rootProject.buildFileName = "build.gradle.kts"
 
 listOf(
-    "1.8.9-forge"
+    "1.8.9-forge",
+    "1.12.2-forge",
+    "1.15.2-forge",
+    "1.16.5-forge",
+    "1.16.5-fabric",
+    "1.17.1-forge",
+    "1.17.1-fabric",
+    "1.18.2-forge",
+    "1.18.2-fabric",
+    "1.19.2-forge",
+    "1.19.2-fabric"
 ).forEach { version ->
     include(":$version")
     project(":$version").apply {

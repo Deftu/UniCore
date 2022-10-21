@@ -9,21 +9,12 @@ interface Notifications {
     /**
      * Adds a notification to the queue.
      */
-    fun post(title: String, content: String)
-    /**
-     * Adds a notification to the queue.
-     */
-    fun post(title: String, content: String, duration: Float = DEFAULT_DURATION)
-    /**
-     * Adds a notification to the queue.
-     */
-    fun post(title: String, content: String, action: Runnable)
-    /**
-     * Adds a notification to the queue.
-     */
-    fun post(title: String, content: String, duration: Float = DEFAULT_DURATION, action: Runnable)
+    fun send(data: NotificationData)
 
     companion object {
         const val DEFAULT_DURATION = 5f
+
+        @JvmStatic
+        fun builder() = NotificationBuilder()
     }
 }
